@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ingresá a tu cuenta de ConstruMarket para continuar con tus compras.">
+    <title>Iniciar sesión | ConstruMarket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/variables.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/responsive.css">
+</head>
+<body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <section class="header-main" aria-label="Cabecera principal">
+            <div class="container header-main__content">
+                <details class="mobile-menu">
+                    <summary aria-label="Abrir menú de navegación"><span class="hamburger" aria-hidden="true"></span><span class="sr-only">Menú</span></summary>
+                    <nav class="mobile-menu__panel" aria-label="Navegación móvil">
+                        <form class="mobile-search" action="#" role="search">
+                            <label class="sr-only" for="login-mobile-search">Buscar productos</label>
+                            <input id="login-mobile-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
+                            <button type="submit">Buscar</button>
+                        </form>
+                        <a href="index.html">Inicio</a><a href="index.html#categorias">Categorías</a><a href="index.html#productos">Productos</a><a href="index.html#promociones">Ofertas</a><a href="login.html" aria-current="page">Ingresar</a><a href="register.html">Crear cuenta</a>
+                    </nav>
+                </details>
+                <a class="brand" href="index.html" aria-label="ConstruMarket, ir al inicio"><img src="../public/images/construmarket-logo.png" alt="ConstruMarket, todo para tu obra en un solo lugar"></a>
+                <form class="header-search" action="#" role="search">
+                    <label class="sr-only" for="login-desktop-search">Buscar productos</label>
+                    <input id="login-desktop-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
+                    <button type="submit" aria-label="Buscar">Buscar</button>
+                </form>
+                <nav class="header-actions" aria-label="Accesos de usuario">
+                    <a href="login.html" class="header-action" aria-current="page"><span class="header-action__icon" aria-hidden="true">●</span><span><small>Hola</small>Ingresar</span></a>
+                    <a href="productCart.html" class="header-action header-action--cart"><span class="cart-icon" aria-hidden="true">▰</span><span class="header-action__label"><small>Tu compra</small>Carrito (0)</span></a>
+                </nav>
+            </div>
+        </section>
+        <nav class="desktop-nav" aria-label="Navegación principal">
+            <div class="container desktop-nav__content">
+                <a class="desktop-nav__categories" href="index.html#categorias"><span class="hamburger hamburger--small" aria-hidden="true"></span>Categorías</a>
+                <ul><li><a href="index.html">Inicio</a></li><li><a href="index.html#productos">Productos</a></li><li><a href="index.html#promociones">Ofertas</a></li><li><a href="index.html#beneficios">Servicios</a></li><li><a href="register.html">Crear cuenta</a></li><li><a href="#ayuda">Ayuda</a></li></ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido-principal" class="auth-main">
+        <section class="auth-section auth-section--login" aria-labelledby="login-title">
+            <div class="container auth-section__content">
+                <header class="auth-heading">
+                    <p class="eyebrow">Qué bueno verte de nuevo</p>
+                    <h1 id="login-title">Iniciar sesión</h1>
+                    <p>Ingresá tus datos para continuar con tus compras.</p>
+                </header>
+                <form class="auth-card" action="#" method="post">
+                    <div class="form-field">
+                        <label for="login-email">Correo electrónico</label>
+                        <input id="login-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="nombre@correo.com">
+                    </div>
+                    <div class="form-field">
+                        <label for="login-password">Contraseña</label>
+                        <input id="login-password" type="password" name="password" autocomplete="current-password">
+                    </div>
+                    
+                    <div class="form-pie">
+                        <div class="form-pie__item">
+                            <input type="checkbox" id="login-remember" name="remember">
+                            <label for="login-remember">Recordarme</label>
+                        </div>
+                        <div class="form-pie__item">
+                            <a class="auth-forgot" href="#">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        
+                    </div>
+                    <button class="button button--primary auth-submit" type="submit">Iniciar sesión</button>
+                    <div class="auth-switch">
+                        <p>¿No tenés cuenta?</p>
+                        <a href="register.html">Registrate</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="newsletter" aria-labelledby="login-newsletter-title">
+            <div class="container newsletter__content">
+                <div><p class="eyebrow eyebrow--light">Novedades y oportunidades</p><h2 id="login-newsletter-title">Recibí ofertas para tu próxima obra</h2><p>Suscribite y enterate antes que nadie de promociones, lanzamientos y consejos.</p></div>
+                <form class="newsletter__form" action="#"><label for="login-newsletter-email">Tu correo electrónico</label><div><input id="login-newsletter-email" type="email" name="newsletterEmail" placeholder="nombre@correo.com"><button class="button button--primary" type="submit">Suscribirme</button></div></form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="ayuda">
+        <div class="container footer-grid">
+            <section class="footer-brand" aria-labelledby="login-footer-brand-title">
+                <img src="../public/images/construmarket-logo.png" alt="ConstruMarket"><h2 class="sr-only" id="login-footer-brand-title">ConstruMarket</h2><p>Todo para tu obra en un solo lugar.</p>
+                <div class="social-links" aria-label="Redes sociales"><a href="#" aria-label="Seguinos en Instagram"><img src="../public/images/icons8-instagram-48.png" alt=""></a><a href="#" aria-label="Seguinos en Facebook"><img src="../public/images/icons8-facebook-nuevo-48.png" alt=""></a><a href="#" aria-label="Seguinos en LinkedIn"><img src="../public/images/icons8-linkedin-48.png" alt=""></a></div>
+            </section>
+            <nav class="footer-column" aria-label="Institucional"><h2>Institucional</h2><a href="#">Quiénes somos</a><a href="#">Sucursales</a><a href="#">Trabajá con nosotros</a><a href="#">Términos y condiciones</a></nav>
+            <nav class="footer-column" aria-label="Ayuda"><h2>Ayuda</h2><a href="#">Preguntas frecuentes</a><a href="#">Envíos y entregas</a><a href="#">Cambios y devoluciones</a><a href="#">Defensa del consumidor</a></nav>
+            <nav class="footer-column" aria-label="Mi cuenta"><h2>Mi cuenta</h2><a href="login.html" aria-current="page">Ingresar</a><a href="register.html">Crear cuenta</a><a href="productCart.html">Ver carrito</a><a href="index.html#productos">Mis favoritos</a></nav>
+            <section class="footer-column footer-contact" aria-labelledby="login-contact-title"><h2 id="login-contact-title">Atención al cliente</h2><p>Lun a vie de 8 a 18 h</p><a href="tel:08005550088">0800-555-0088</a><a href="mailto:ayuda@construmarket.com.ar">ayuda@construmarket.com.ar</a></section>
+        </div>
+        <div class="container footer-bottom"><p>© 2026 ConstruMarket. Todos los derechos reservados.</p><p>Proyecto educativo — Digital House</p></div>
+    </footer>
+</body>
+</html>

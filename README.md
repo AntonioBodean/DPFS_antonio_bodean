@@ -4,7 +4,7 @@
 
 ConstruMarket es un marketplace especializado en la comercialización de materiales de construcción, herramientas, ferretería e insumos para obras y remodelaciones.
 
-La plataforma permitirá a los usuarios explorar productos organizados por categorías, consultar información detallada, agregar artículos al carrito de compras y gestionar sus pedidos de forma rápida y sencilla.
+La plataforma está proyectada para permitir a los usuarios explorar productos organizados por categorías, consultar información detallada, agregar artículos al carrito de compras y gestionar sus pedidos de forma rápida y sencilla.
 
 El objetivo principal es brindar una experiencia de compra moderna y accesible tanto para profesionales de la construcción como para particulares que buscan materiales para sus proyectos.
 
@@ -70,6 +70,8 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades principales previstas
 
+Las siguientes funcionalidades corresponden al alcance futuro del proyecto y todavía no están implementadas de forma dinámica:
+
 * Registro e inicio de sesión de usuarios.
 * Catálogo de productos por categorías.
 * Búsqueda de productos.
@@ -82,25 +84,30 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ---
 
-## Tecnologías a utilizar
+## Tecnologías
 
-### Frontend
+### Implementadas en Sprint 2
 
 * HTML5
 * CSS3
+
+### Previstas para próximas etapas
+
+#### Frontend
+
 * JavaScript
 * React
 
-### Backend
+#### Backend
 
 * Node.js
 * Express.js
 
-### Base de Datos
+#### Base de datos
 
 * MySQL
 
-### Control de versiones
+#### Control de versiones
 
 * Git
 * GitHub
@@ -111,7 +118,7 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 Los wireframes del proyecto se encuentran dentro de la carpeta:
 
-/wireframes
+`wireframe/`
 
 Incluyen las siguientes vistas:
 
@@ -127,7 +134,7 @@ Incluyen las siguientes vistas:
 
 Los recursos gráficos y guía visual del proyecto se encuentran dentro de la carpeta:
 
-/design
+`design/`
 
 Incluyen:
 
@@ -138,6 +145,40 @@ Incluyen:
 
 ---
 
+## Estructura actual
+
+Al finalizar el Sprint 2, el proyecto cuenta con cinco vistas maquetadas en HTML y CSS:
+
+* `views/index.html`: página de inicio.
+* `views/productDetail.html`: detalle de producto.
+* `views/productCart.html`: carrito de compras.
+* `views/register.html`: formulario de registro.
+* `views/login.html`: formulario de inicio de sesión.
+
+Los recursos utilizados por estas vistas se encuentran en `public/`:
+
+* `public/css/`: variables, estilos generales y estilos responsivos.
+* `public/images/`: logo, imágenes de productos e iconos de redes sociales.
+
+Las vistas son estáticas. En esta etapa no incluyen JavaScript, backend, persistencia de datos ni funcionalidades dinámicas.
+
+---
+
+## Cómo abrir el sitio localmente
+
+1. Descargá o cloná este repositorio.
+2. Abrí el archivo `views/index.html` en un navegador web.
+
+No es necesario instalar dependencias ni iniciar un servidor para visualizar la maqueta actual.
+
+---
+
+## Tablero de trabajo
+
+El seguimiento de tareas del Sprint 2 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/1/views/2).
+
+---
+
 ## Estado del proyecto
 
-Sprint 1 - Planificación e investigación.
+Sprint 2 finalizado - Maquetado estático y responsivo de las cinco vistas en HTML y CSS.

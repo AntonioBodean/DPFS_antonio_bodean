@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprá materiales de construcción, herramientas y artículos de ferretería en ConstruMarket. Todo para tu obra en un solo lugar.">
+    <title>ConstruMarket | Materiales de construcción y herramientas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/variables.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/responsive.css">
+</head>
+<body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <section class="header-main" aria-label="Cabecera principal">
+            <div class="container header-main__content">
+                <details class="mobile-menu">
+                    <summary aria-label="Abrir menú de navegación">
+                        <span class="hamburger" aria-hidden="true"></span>
+                        <span class="sr-only">Menú</span>
+                    </summary>
+                    <nav class="mobile-menu__panel" aria-label="Navegación móvil">
+                        <form class="mobile-search" action="#" role="search">
+                            <label class="sr-only" for="mobile-search">Buscar productos</label>
+                            <input id="mobile-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
+                            <button type="submit">Buscar</button>
+                        </form>
+                        <a href="index.html">Inicio</a>
+                        <a href="#categorias">Categorías</a>
+                        <a href="#productos">Productos</a>
+                        <a href="#promociones">Ofertas</a>
+                        <a href="login.html">Ingresar</a>
+                        <a href="register.html">Crear cuenta</a>
+                    </nav>
+                </details>
+
+                <a class="brand" href="index.html" aria-label="ConstruMarket, ir al inicio">
+                    <img src="../public/images/construmarket-logo.png" alt="ConstruMarket, todo para tu obra en un solo lugar">
+                </a>
+
+                <form class="header-search" action="#" role="search">
+                    <label class="sr-only" for="desktop-search">Buscar productos</label>
+                    <input id="desktop-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
+                    <button type="submit" aria-label="Buscar">Buscar</button>
+                </form>
+
+                <nav class="header-actions" aria-label="Accesos de usuario">
+                    <a href="login.html" class="header-action">
+                        <span class="header-action__icon" aria-hidden="true">●</span>
+                        <span><small>Hola</small>Ingresar</span>
+                    </a>
+                    <a href="productCart.html" class="header-action header-action--cart">
+                        <span class="cart-icon" aria-hidden="true">▰</span>
+                        <span class="header-action__label"><small>Tu compra</small>Carrito (0)</span>
+                    </a>
+                </nav>
+            </div>
+        </section>
+
+        <nav class="desktop-nav" aria-label="Navegación principal">
+            <div class="container desktop-nav__content">
+                <a class="desktop-nav__categories" href="#categorias">
+                    <span class="hamburger hamburger--small" aria-hidden="true"></span>
+                    Categorías
+                </a>
+                <ul>
+                    <li><a href="index.html" aria-current="page">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#promociones">Ofertas</a></li>
+                    <li><a href="#beneficios">Servicios</a></li>
+                    <li><a href="register.html">Crear cuenta</a></li>
+                    <li><a href="#ayuda">Ayuda</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido-principal">
+        <section class="hero section" aria-labelledby="hero-title">
+            <div class="container">
+                <article class="hero__banner">
+                    <div class="hero__content">
+                        <p class="eyebrow">Construí, renová, transformá</p>
+                        <h1 id="hero-title">Todo para tu obra en un solo lugar</h1>
+                        <p>Materiales, herramientas y soluciones para llevar tu proyecto del plano a la realidad.</p>
+                        <a class="button button--primary" href="#productos">Ver productos</a>
+                    </div>
+                    <div class="hero__visual" aria-hidden="true">
+                        <span class="hero__sun"></span>
+                        <span class="hero__building hero__building--back"></span>
+                        <span class="hero__building hero__building--front"></span>
+                        <span class="hero__badge">OBRA<br><strong>EN MARCHA</strong></span>
+                    </div>
+                </article>
+
+                <div class="promotions" id="promociones">
+                    <article class="promotion-card promotion-card--orange">
+                        <p>Hasta 12 cuotas</p>
+                        <h2>Equipá tu taller</h2>
+                        <a href="#productos">Ver herramientas <span aria-hidden="true">→</span></a>
+                    </article>
+                    <article class="promotion-card promotion-card--blue">
+                        <p>Precios especiales</p>
+                        <h2>Materiales para cada etapa</h2>
+                        <a href="#categorias">Explorar categorías <span aria-hidden="true">→</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section categories" id="categorias" aria-labelledby="categories-title">
+            <div class="container">
+                <header class="section-heading section-heading--center">
+                    <p class="eyebrow">Encontrá lo que buscás</p>
+                    <h2 id="categories-title">Categorías destacadas</h2>
+                </header>
+                <div class="categories__grid">
+                    <a class="category" href="#productos">
+                        <span class="category__icon" aria-hidden="true">CM</span>
+                        <span>Cementos</span>
+                    </a>
+                    <a class="category" href="#productos">
+                        <span class="category__icon category__icon--bricks" aria-hidden="true">▦</span>
+                        <span>Ladrillos</span>
+                    </a>
+                    <a class="category" href="#productos">
+                        <span class="category__icon" aria-hidden="true">H</span>
+                        <span>Hierros</span>
+                    </a>
+                    <a class="category" href="#productos">
+                        <span class="category__icon" aria-hidden="true">T</span>
+                        <span>Herramientas</span>
+                    </a>
+                    <a class="category" href="#productos">
+                        <span class="category__icon" aria-hidden="true">P</span>
+                        <span>Pinturas</span>
+                    </a>
+                    <a class="category" href="#productos">
+                        <span class="category__icon" aria-hidden="true">⚡</span>
+                        <span>Electricidad</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--soft" id="productos" aria-labelledby="products-title">
+            <div class="container">
+                <header class="section-heading">
+                    <div>
+                        <p class="eyebrow">Elegidos para vos</p>
+                        <h2 id="products-title">Productos destacados</h2>
+                    </div>
+                    <a class="text-link" href="productDetail.html">Ver todos <span aria-hidden="true">→</span></a>
+                </header>
+
+                <div class="products-grid">
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--cement">
+                            <img src="../public/images/cemento.jpg" alt="Bolsa de cemento Portland CPC40 de 25 kilogramos" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Materiales</p>
+                            <h3>Cemento Portland 25 kg</h3>
+                            <p class="product-card__description">Alta resistencia para estructuras y trabajos de albañilería.</p>
+                            <p class="product-card__stock product-card__stock--available">En stock</p>
+                            <p class="product-card__price"><small>Precio por unidad</small>$ 12.890</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--brick">
+                            <img src="../public/images/ladrillo.jpg" alt="Ladrillo hueco cerámico de 12 por 18 por 33 centímetros" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Materiales</p>
+                            <h3>Ladrillo hueco 12 × 18 × 33 cm</h3>
+                            <p class="product-card__description">Cerámico, liviano y de excelente aislación térmica.</p>
+                            <p class="product-card__stock product-card__stock--available">En stock</p>
+                            <p class="product-card__price"><small>Precio por unidad</small>$ 1.250</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--tool">
+                            <img src="../public/images/amoladora.jpg" alt="Amoladora angular amarilla con empuñadura lateral" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Herramientas</p>
+                            <h3>Amoladora angular 850 W</h3>
+                            <p class="product-card__description">Compacta y potente, con disco de 115 mm y empuñadura lateral.</p>
+                            <p class="product-card__stock product-card__stock--few">Últimas unidades</p>
+                            <p class="product-card__price"><small>Precio final</small>$ 84.990</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--paint">
+                            <img src="../public/images/latex.jpg" alt="Balde de pintura látex mate para interiores" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Pinturas</p>
+                            <h3>Pintura látex interior 20 L</h3>
+                            <p class="product-card__description">Terminación mate, alto poder cubritivo y secado rápido.</p>
+                            <p class="product-card__stock product-card__stock--available">En stock</p>
+                            <p class="product-card__price"><small>Precio final</small>$ 68.500</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--drill">
+                            <img src="../public/images/taladro.jpg" alt="Taladro eléctrico percutor amarillo con empuñadura" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Herramientas</p>
+                            <h3>Taladro eléctrico percutor 700 W</h3>
+                            <p class="product-card__description">Velocidad variable, mandril de 13 mm y función reversa.</p>
+                            <p class="product-card__stock product-card__stock--available">En stock</p>
+                            <p class="product-card__price"><small>Precio final</small>$ 96.300</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <figure class="product-card__image product-card__image--steel">
+                            <img src="../public/images/hierro.jpg" alt="Barra de hierro redondo liso" loading="lazy">
+                        </figure>
+                        <div class="product-card__body">
+                            <p class="product-card__category">Hierros</p>
+                            <h3>Hierro redondo liso 10 mm</h3>
+                            <p class="product-card__description">Barra maciza de acero para herrería y trabajos de obra.</p>
+                            <p class="product-card__stock product-card__stock--available">En stock</p>
+                            <p class="product-card__price"><small>Precio por barra</small>$ 18.750</p>
+                            <a class="button button--secondary" href="productDetail.html">Ver producto</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section benefits" id="beneficios" aria-labelledby="benefits-title">
+            <div class="container">
+                <header class="section-heading section-heading--center">
+                    <p class="eyebrow">Comprá con confianza</p>
+                    <h2 id="benefits-title">Todo lo que necesitás, más cerca</h2>
+                </header>
+                <div class="benefits__grid">
+                    <article class="benefit-card">
+                        <span class="benefit-card__icon" aria-hidden="true">01</span>
+                        <div><h3>Envíos a todo el país</h3><p>Coordinamos la entrega de tu compra.</p></div>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-card__icon" aria-hidden="true">02</span>
+                        <div><h3>Compra segura</h3><p>Tus datos siempre están protegidos.</p></div>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-card__icon" aria-hidden="true">03</span>
+                        <div><h3>Medios de pago</h3><p>Elegí la opción que mejor se adapta a vos.</p></div>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-card__icon" aria-hidden="true">04</span>
+                        <div><h3>Soporte personalizado</h3><p>Te asesoramos antes y después de comprar.</p></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section brands" aria-labelledby="brands-title">
+            <div class="container">
+                <header class="section-heading section-heading--center">
+                    <p class="eyebrow">Calidad para cada proyecto</p>
+                    <h2 id="brands-title">Tus marcas de referencia</h2>
+                </header>
+                <div class="brands__grid" aria-label="Marcas disponibles">
+                    <span>FORTEX</span><span>HÁBITAT</span><span>NORTOOL</span><span>PRISMA</span><span>VÉRTICE</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter" aria-labelledby="newsletter-title">
+            <div class="container newsletter__content">
+                <div>
+                    <p class="eyebrow eyebrow--light">Novedades y oportunidades</p>
+                    <h2 id="newsletter-title">Recibí ofertas para tu próxima obra</h2>
+                    <p>Suscribite y enterate antes que nadie de promociones, lanzamientos y consejos.</p>
+                </div>
+                <form class="newsletter__form" action="#">
+                    <label for="newsletter-email">Tu correo electrónico</label>
+                    <div>
+                        <input id="newsletter-email" type="email" name="email" placeholder="nombre@correo.com">
+                        <button class="button button--primary" type="submit">Suscribirme</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="ayuda">
+        <div class="container footer-grid">
+            <section class="footer-brand" aria-labelledby="footer-brand-title">
+                <img src="../public/images/construmarket-logo.png" alt="ConstruMarket">
+                <h2 class="sr-only" id="footer-brand-title">ConstruMarket</h2>
+                <p>Todo para tu obra en un solo lugar.</p>
+                <div class="social-links" aria-label="Redes sociales">
+                    <a href="#" aria-label="Seguinos en Instagram">
+                        <img src="../public/images/icons8-instagram-48.png" alt="">
+                    </a>
+                    <a href="#" aria-label="Seguinos en Facebook">
+                        <img src="../public/images/icons8-facebook-nuevo-48.png" alt="">
+                    </a>
+                    <a href="#" aria-label="Seguinos en LinkedIn">
+                        <img src="../public/images/icons8-linkedin-48.png" alt="">
+                    </a>
+                </div>
+            </section>
+            <nav class="footer-column" aria-label="Institucional">
+                <h2>Institucional</h2>
+                <a href="#">Quiénes somos</a>
+                <a href="#">Sucursales</a>
+                <a href="#">Trabajá con nosotros</a>
+                <a href="#">Términos y condiciones</a>
+            </nav>
+            <nav class="footer-column" aria-label="Ayuda">
+                <h2>Ayuda</h2>
+                <a href="#">Preguntas frecuentes</a>
+                <a href="#">Envíos y entregas</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Defensa del consumidor</a>
+            </nav>
+            <nav class="footer-column" aria-label="Mi cuenta">
+                <h2>Mi cuenta</h2>
+                <a href="login.html">Ingresar</a>
+                <a href="register.html">Crear cuenta</a>
+                <a href="productCart.html">Ver carrito</a>
+                <a href="#productos">Mis favoritos</a>
+            </nav>
+            <section class="footer-column footer-contact" aria-labelledby="contact-title">
+                <h2 id="contact-title">Atención al cliente</h2>
+                <p>Lun a vie de 8 a 18 h</p>
+                <a href="tel:08005550088">0800-555-0088</a>
+                <a href="mailto:ayuda@construmarket.com.ar">ayuda@construmarket.com.ar</a>
+            </section>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2026 ConstruMarket. Todos los derechos reservados.</p>
+            <p>Proyecto educativo — Digital House</p>
+        </div>
+    </footer>
+</body>
+</html>
