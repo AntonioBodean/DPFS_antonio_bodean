@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+        <%- include('../partials/header.ejs') %>
+
+            <main id="contenido-principal" class="cart-page">
+                <section class="container cart" aria-labelledby="cart-title">
+                    <h1 id="cart-title">
+                        Tu carrito
+                    </h1>
+
+                    <div class="cart-table" role="table" aria-label="Productos en el carrito">
+                        <div class="cart-table__head" role="row">
+                            <span role="columnheader">Producto</span>
+                            <span role="columnheader">Precio</span>
+                            <span role="columnheader">Cantidad</span>
+                            <span role="columnheader">Subtotal</span>
+                            <span class="sr-only" role="columnheader">Eliminar</span>
+                        </div>
+
+                        <article class="cart-item" role="row">
+                            <div class="cart-item__product" role="cell">
+                                <a class="cart-item__image" href="/products/detail"><img src="/images/cemento.jpg"
+                                        alt="Bolsa de cemento Portland CPC40 de 25 kilogramos"></a>
+                                <div class="cart-item__info">
+                                    <h2><a href="/products/detail">Cemento Portland 25 kg</a></h2>
+                                    <p>SKU: CEM-CPC40-25</p>
+                                    <strong class="cart-item__mobile-price">$ 12.890</strong>
+                                </div>
+                            </div>
+                            <strong class="cart-item__price" role="cell">$ 12.890</strong>
+                            <div class="quantity-control" role="cell" aria-label="Cantidad de Cemento Portland">
+                                <button type="button" aria-label="Quitar una unidad">−</button><span>1</span><button
+                                    type="button" aria-label="Agregar una unidad">+</button>
+                            </div>
+                            <p class="cart-item__subtotal" role="cell"><span>Total</span><strong>$ 12.890</strong></p>
+                            <button class="cart-item__remove" type="button" role="cell"
+                                aria-label="Eliminar Cemento Portland del carrito">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" />
+                                </svg>
+                            </button>
+                        </article>
+
+                        <article class="cart-item" role="row">
+                            <div class="cart-item__product" role="cell">
+                                <a class="cart-item__image" href="/products/detail"><img src="/images/ladrillo.jpg"
+                                        alt="Ladrillo hueco cerámico de 12 por 18 por 33 centímetros"></a>
+                                <div class="cart-item__info">
+                                    <h2><a href="/products/detail">Ladrillo hueco 12 × 18 × 33 cm</a></h2>
+                                    <p>SKU: LAD-HUECO-12</p>
+                                    <strong class="cart-item__mobile-price">$ 1.250</strong>
+                                </div>
+                            </div>
+                            <strong class="cart-item__price" role="cell">$ 1.250</strong>
+                            <div class="quantity-control" role="cell" aria-label="Cantidad de ladrillos huecos">
+                                <button type="button" aria-label="Quitar una unidad">−</button><span>1</span><button
+                                    type="button" aria-label="Agregar una unidad">+</button>
+                            </div>
+                            <p class="cart-item__subtotal" role="cell"><span>Total</span><strong>$ 1.250</strong></p>
+                            <button class="cart-item__remove" type="button" role="cell"
+                                aria-label="Eliminar ladrillo hueco del carrito">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" />
+                                </svg>
+                            </button>
+                        </article>
+
+                        <article class="cart-item" role="row">
+                            <div class="cart-item__product" role="cell">
+                                <a class="cart-item__image" href="/products/detail"><img src="/images/amoladora.jpg"
+                                        alt="Amoladora angular amarilla con empuñadura lateral"></a>
+                                <div class="cart-item__info">
+                                    <h2><a href="/products/detail">Amoladora angular 850 W</a></h2>
+                                    <p>SKU: HER-AMO-850</p>
+                                    <strong class="cart-item__mobile-price">$ 84.990</strong>
+                                </div>
+                            </div>
+                            <strong class="cart-item__price" role="cell">$ 84.990</strong>
+                            <div class="quantity-control" role="cell" aria-label="Cantidad de amoladoras">
+                                <button type="button" aria-label="Quitar una unidad">−</button><span>1</span><button
+                                    type="button" aria-label="Agregar una unidad">+</button>
+                            </div>
+                            <p class="cart-item__subtotal" role="cell"><span>Total</span><strong>$ 84.990</strong></p>
+                            <button class="cart-item__remove" type="button" role="cell"
+                                aria-label="Eliminar amoladora del carrito">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" />
+                                </svg>
+                            </button>
+                        </article>
+
+                        <article class="cart-item cart-item--desktop" role="row">
+                            <div class="cart-item__product" role="cell">
+                                <a class="cart-item__image" href="/products/detail"><img src="/images/latex.jpg"
+                                        alt="Balde de pintura látex mate para interiores"></a>
+                                <div class="cart-item__info">
+                                    <h2><a href="/products/detail">Pintura látex interior 20 L</a></h2>
+                                    <p>SKU: PIN-LATEX-20</p>
+                                    <strong class="cart-item__mobile-price">$ 68.500</strong>
+                                </div>
+                            </div>
+                            <strong class="cart-item__price" role="cell">$ 68.500</strong>
+                            <div class="quantity-control" role="cell" aria-label="Cantidad de pinturas látex">
+                                <button type="button" aria-label="Quitar una unidad">−</button><span>1</span><button
+                                    type="button" aria-label="Agregar una unidad">+</button>
+                            </div>
+                            <p class="cart-item__subtotal" role="cell"><span>Total</span><strong>$ 68.500</strong></p>
+                            <button class="cart-item__remove" type="button" role="cell"
+                                aria-label="Eliminar pintura látex del carrito">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" />
+                                </svg>
+                            </button>
+                        </article>
+                    </div>
+
+                    <div class="cart-checkout">
+                        <a class="button cart-continue" href="/products"><span aria-hidden="true">←</span>
+                            Seguir
+                            comprando</a>
+
+                        <aside class="order-summary" aria-labelledby="summary-title">
+                            <h2 id="summary-title">Resumen del pedido</h2>
+                            <dl>
+                                <div>
+                                    <dt>Productos <span class="summary-count summary-count--desktop">(4)</span><span
+                                            class="summary-count summary-count--mobile">(3)</span></dt>
+                                    <dd><span class="summary-total--desktop">$ 167.630</span><span
+                                            class="summary-total--mobile">$ 99.130</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Envío</dt>
+                                    <dd>$ 0</dd>
+                                </div>
+                                <div class="order-summary__total">
+                                    <dt>Total</dt>
+                                    <dd><span class="summary-total--desktop">$ 167.630</span><span
+                                            class="summary-total--mobile">$ 99.130</span></dd>
+                                </div>
+                            </dl>
+                            <a class="button button--secondary" href="/users/login">Iniciar compra</a>
+                        </aside>
+                    </div>
+                </section>
+
+                <%- include('../partials/newsletter.ejs') %>
+            </main>
+
+            <%- include('../partials/footer.ejs') %>
+    </body>
+
+</html>

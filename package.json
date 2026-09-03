@@ -1,0 +1,26 @@
+{
+  "name": "dpfs_antonio_bodean",
+  "version": "1.0.0",
+  "description": "ConstruMarket es un marketplace especializado en la comercialización de materiales de construcción, herramientas, ferretería e insumos para obras y remodelaciones.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioBodean/DPFS_antonio_bodean.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AntonioBodean/DPFS_antonio_bodean/issues"
+  },
+  "homepage": "https://github.com/AntonioBodean/DPFS_antonio_bodean#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}

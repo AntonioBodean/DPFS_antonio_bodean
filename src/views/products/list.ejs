@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <div class="site-shell">
+            <a class="skip-link" href="#contenido-principal">
+                Saltar al contenido principal
+            </a>
+
+            <%- include('../partials/header.ejs') %>
+
+                <main id="contenido-principal">
+                    <section class="section section--soft" aria-labelledby="products-title">
+                        <div class="container">
+                            <header class="section-heading">
+                                <div>
+                                    <p class="eyebrow">Nuestro catálogo</p>
+                                    <h1 id="products-title">Todos los productos</h1>
+                                </div>
+                                <a class="button button--primary" href="/products/create">
+                                    Nuevo producto
+                                </a>
+                            </header>
+
+                            <div class="products-grid">
+                                <% products.forEach(product=> { %>
+                                    <article class="product-card">
+                                        <figure class="product-card__image">
+                                            <img src="/images/<%= product.image %>" alt="<%= product.name %>"
+                                                loading="lazy">
+                                        </figure>
+
+                                        <div class="product-card__body">
+                                            <p class="product-card__category">
+                                                <%= product.category %>
+                                            </p>
+
+                                            <h2>
+                                                <%= product.name %>
+                                            </h2>
+
+                                            <p class="product-card__stock product-card__stock--available">
+                                                En stock
+                                            </p>
+
+                                            <p class="product-card__price">
+                                                <small>Precio final</small>
+                                                $ <%= product.price.toLocaleString('es-AR') %>
+                                            </p>
+
+                                            <div class="product-card__actions">
+                                                <a class="button button--secondary" href="/products/detail">
+                                                    Ver producto
+                                                </a>
+
+                                                <a class="button button--primary"
+                                                    href="/products/edit/<%= product.id %>">
+                                                    Editar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <% }) %>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <%- include('../partials/newsletter.ejs') %>
+                    <%- include('../partials/footer.ejs') %>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <div class="site-shell">
+            <a class="skip-link" href="#contenido-principal">
+                Saltar al contenido principal
+            </a>
+
+            <%- include('../partials/header.ejs') %>
+
+                <main id="contenido-principal">
+                    <section class="auth-section" aria-labelledby="edit-product-title">
+                        <div class="container auth-section__content">
+                            <header class="auth-heading">
+                                <p class="eyebrow">Administración</p>
+                                <h1 id="edit-product-title">Editar producto</h1>
+                                <p>Actualizá la información de <strong>
+                                        <%= product.name %>
+                                    </strong>.</p>
+                            </header>
+
+                            <form class="auth-card product-form" action="#" method="post" enctype="multipart/form-data">
+                                <div class="form-field">
+                                    <label for="product-name">Nombre del producto</label>
+                                    <input id="product-name" type="text" name="name" value="<%= product.name %>"
+                                        required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-description">Descripción</label>
+                                    <textarea id="product-description" style="width: 100%;" name="description"
+                                        rows="5"><%= product.description %></textarea>
+                                </div>
+
+                                <div class="form-field">
+                                    <label>Imagen actual</label>
+
+                                    <img class="product-form__current-image" src="/images/<%= product.image %>"
+                                        alt="<%= product.name %>">
+
+                                    <label for="product-image">
+                                        Reemplazar imagen <span>(opcional)</span>
+                                    </label>
+
+                                    <input id="product-image" type="file" name="image" accept="image/*">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-category">Categoría</label>
+                                    <select id="product-category" name="category" required>
+                                        <option value="Materiales" <%=product.category==='Materiales' ? 'selected' : ''
+                                            %>
+                                            >
+                                            Materiales
+                                        </option>
+
+                                        <option value="Herramientas" <%=product.category==='Herramientas' ? 'selected'
+                                            : '' %>
+                                            >
+                                            Herramientas
+                                        </option>
+
+                                        <option value="Pinturas" <%=product.category==='Pinturas' ? 'selected' : '' %>
+                                            >
+                                            Pinturas
+                                        </option>
+
+                                        <option value="Hierros" <%=product.category==='Hierros' ? 'selected' : '' %>
+                                            >
+                                            Hierros
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-colors">
+                                        Colores <span>(opcional)</span>
+                                    </label>
+                                    <input id="product-colors" type="text" name="colors"
+                                        value="<%= product.colors || '' %>" placeholder="Ej.: rojo, azul, gris">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-price">Precio</label>
+                                    <input id="product-price" type="number" name="price" min="0" step="0.01"
+                                        value="<%= product.price %>" required>
+                                </div>
+
+                                <button class="button button--primary auth-submit" type="submit">
+                                    Guardar cambios
+                                </button>
+
+                                <div class="auth-switch">
+                                    <a href="/products">Cancelar y volver al listado</a>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <%- include('../partials/newsletter.ejs') %>
+                </main>
+
+                <%- include('../partials/footer.ejs') %>
+        </div>
+    </body>
+
+</html>

@@ -68,117 +68,173 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ---
 
-## Funcionalidades principales previstas
+## Funcionalidades implementadas
 
-Las siguientes funcionalidades corresponden al alcance futuro del proyecto y todavía no están implementadas de forma dinámica:
+Durante los primeros tres sprints se implementaron:
 
-* Registro e inicio de sesión de usuarios.
-* Catálogo de productos por categorías.
-* Búsqueda de productos.
-* Página de detalle de producto.
-* Carrito de compras.
-* Gestión de perfiles de usuario.
-* Panel de administración de productos.
-* Gestión de stock.
-* Dashboard con métricas básicas.
+- Página de inicio responsive.
+- Listado dinámico de productos.
+- Página de detalle de producto.
+- Carrito de compras.
+- Formularios de registro e inicio de sesión.
+- Formulario de creación de productos.
+- Formulario de edición con datos precargados.
+- Rutas y controladores separados por dominio.
+- Componentes reutilizables mediante parciales de EJS.
+- Archivos CSS e imágenes servidos desde la carpeta `public`.
+
+Los formularios todavía no guardan información de manera permanente. La persistencia de datos y el procesamiento completo se implementarán en próximos sprints.
 
 ---
 
 ## Tecnologías
 
-### Implementadas en Sprint 2
+### Sprint 2
 
-* HTML5
-* CSS3
+- HTML5
+- CSS3
+- Diseño responsive
 
-### Previstas para próximas etapas
+### Sprint 3
 
-#### Frontend
+- Node.js
+- Express.js
+- EJS
+- Arquitectura basada en rutas, controladores y vistas
 
-* JavaScript
-* React
+### Herramientas
 
-#### Backend
+- Git
+- GitHub
+- GitHub Projects
 
-* Node.js
-* Express.js
+---
 
-#### Base de datos
+## Estructura del proyecto
 
-* MySQL
+```text
+ConstruMarket/
+├── public/
+│   ├── css/
+│   │   ├── variables.css
+│   │   ├── style.css
+│   │   └── responsive.css
+│   └── images/
+├── src/
+│   ├── app.js
+│   ├── controllers/
+│   │   ├── mainController.js
+│   │   ├── productController.js
+│   │   └── userController.js
+│   ├── routes/
+│   │   ├── mainRoutes.js
+│   │   ├── productRoutes.js
+│   │   └── userRoutes.js
+│   └── views/
+│       ├── index.ejs
+│       ├── partials/
+│       │   ├── head.ejs
+│       │   ├── header.ejs
+│       │   ├── newsletter.ejs
+│       │   └── footer.ejs
+│       ├── products/
+│       │   ├── list.ejs
+│       │   ├── detail.ejs
+│       │   ├── cart.ejs
+│       │   ├── create.ejs
+│       │   └── edit.ejs
+│       └── users/
+│           ├── login.ejs
+│           └── register.ejs
+├── views/
+├── retro.md
+├── package.json
+└── README.md
+```
 
-#### Control de versiones
+La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Sprint 2 como referencia. Las vistas utilizadas actualmente por Express se encuentran en `src/views/`.
 
-* Git
-* GitHub
+---
+
+## Rutas principales
+
+| Ruta | Descripción |
+|---|---|
+| `/` | Página de inicio |
+| `/products` | Listado de productos |
+| `/products/detail` | Detalle de producto |
+| `/products/cart` | Carrito de compras |
+| `/products/create` | Formulario de creación |
+| `/products/edit/:id` | Formulario de edición |
+| `/users/login` | Inicio de sesión |
+| `/users/register` | Registro de usuario |
+
+---
+
+## Instalación y ejecución
+
+### Requisitos
+
+- Node.js
+- npm
+
+### Pasos
+
+1. Clonar o descargar el repositorio.
+2. Abrir una terminal en la carpeta del proyecto.
+3. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+4. Iniciar la aplicación:
+
+```bash
+npm start
+```
+
+5. Abrir en el navegador:
+
+```text
+http://localhost:3000
+```
+
+Para detener el servidor, presionar `Ctrl + C`.
 
 ---
 
 ## Wireframes
 
-Los wireframes del proyecto se encuentran dentro de la carpeta:
+Los wireframes se encuentran en la carpeta `wireframe/` e incluyen:
 
-`wireframe/`
-
-Incluyen las siguientes vistas:
-
-* Home
-* Detalle de producto
-* Carrito de compras
-* Formulario de registro
-* Login
+- Inicio.
+- Detalle de producto.
+- Carrito.
+- Registro.
+- Login.
+- Versiones para escritorio y teléfono.
 
 ---
 
 ## Diseño visual
 
-Los recursos gráficos y guía visual del proyecto se encuentran dentro de la carpeta:
+Los recursos de diseño se encuentran en `design/`:
 
-`design/`
+- Logo.
+- Paleta de colores.
+- Tipografías.
 
-Incluyen:
-
-* Logo
-* Paleta de colores
-* Tipografías
-* Componentes visuales principales
-
----
-
-## Estructura actual
-
-Al finalizar el Sprint 2, el proyecto cuenta con cinco vistas maquetadas en HTML y CSS:
-
-* `views/index.html`: página de inicio.
-* `views/productDetail.html`: detalle de producto.
-* `views/productCart.html`: carrito de compras.
-* `views/register.html`: formulario de registro.
-* `views/login.html`: formulario de inicio de sesión.
-
-Los recursos utilizados por estas vistas se encuentran en `public/`:
-
-* `public/css/`: variables, estilos generales y estilos responsivos.
-* `public/images/`: logo, imágenes de productos e iconos de redes sociales.
-
-Las vistas son estáticas. En esta etapa no incluyen JavaScript, backend, persistencia de datos ni funcionalidades dinámicas.
-
----
-
-## Cómo abrir el sitio localmente
-
-1. Descargá o cloná este repositorio.
-2. Abrí el archivo `views/index.html` en un navegador web.
-
-No es necesario instalar dependencias ni iniciar un servidor para visualizar la maqueta actual.
+Los recursos utilizados por la aplicación se encuentran en `public/images/`.
 
 ---
 
 ## Tablero de trabajo
 
-El seguimiento de tareas del Sprint 2 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/1/views/2).
+El seguimiento del Sprint 3 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/2/views/1).
 
 ---
 
 ## Estado del proyecto
 
-Sprint 2 finalizado - Maquetado estático y responsivo de las cinco vistas en HTML y CSS.
+Sprint 3 completado: aplicación migrada a Node.js, Express y EJS, con rutas, controladores, vistas organizadas, contenido dinámico, parciales reutilizables y formularios de administración de productos.

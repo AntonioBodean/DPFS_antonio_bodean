@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <div class="site-shell">
+            <a class="skip-link" href="#contenido-principal">
+                Saltar al contenido principal
+            </a>
+
+            <%- include('../partials/header.ejs') %>
+
+                <main id="contenido-principal">
+                    <section class="auth-section" aria-labelledby="create-product-title">
+                        <div class="container auth-section__content">
+                            <header class="auth-heading">
+                                <p class="eyebrow">Administración</p>
+                                <h1 id="create-product-title">Crear producto</h1>
+                                <p>Completá la información del nuevo producto.</p>
+                            </header>
+
+                            <form class="auth-card product-form" action="#" method="post" enctype="multipart/form-data">
+                                <div class="form-field">
+                                    <label for="product-name">Nombre del producto</label>
+                                    <input id="product-name" type="text" name="name"
+                                        placeholder="Ej.: Cemento Portland 25 kg" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-description">Descripción</label>
+                                    <textarea id="product-description" style="width: 100%;" name="description" rows="5"
+                                        placeholder="Describí las características del producto"></textarea>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-image">Imagen</label>
+                                    <input id="product-image" type="file" name="image" accept="image/*" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-category">Categoría</label>
+                                    <select id="product-category" name="category" required>
+                                        <option value="">Seleccioná una categoría</option>
+                                        <option value="materiales">Materiales</option>
+                                        <option value="herramientas">Herramientas</option>
+                                        <option value="pinturas">Pinturas</option>
+                                        <option value="hierros">Hierros</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-colors">
+                                        Colores <span>(opcional)</span>
+                                    </label>
+                                    <input id="product-colors" type="text" name="colors"
+                                        placeholder="Ej.: rojo, azul, gris">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="product-price">Precio</label>
+                                    <input id="product-price" type="number" name="price" min="0" step="0.01"
+                                        placeholder="0.00" required>
+                                </div>
+
+                                <button class="button button--primary auth-submit" type="submit">
+                                    Crear producto
+                                </button>
+
+                                <div class="auth-switch">
+                                    <a href="/products">Cancelar y volver al listado</a>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <%- include('../partials/newsletter.ejs') %>
+                </main>
+
+                <%- include('../partials/footer.ejs') %>
+        </div>
+    </body>
+
+</html>

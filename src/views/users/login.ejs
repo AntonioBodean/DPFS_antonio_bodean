@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+        <%- include('../partials/header.ejs') %>
+
+            <main id="contenido-principal" class="auth-main">
+                <section class="auth-section auth-section--login" aria-labelledby="login-title">
+                    <div class="container auth-section__content">
+                        <header class="auth-heading">
+                            <p class="eyebrow">Qué bueno verte de nuevo</p>
+                            <h1 id="login-title">Iniciar sesión</h1>
+                            <p>Ingresá tus datos para continuar con tus compras.</p>
+                        </header>
+                        <form class="auth-card" action="#" method="post">
+                            <div class="form-field">
+                                <label for="login-email">Correo electrónico</label>
+                                <input id="login-email" type="email" name="email" autocomplete="email" inputmode="email"
+                                    placeholder="nombre@correo.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="login-password">Contraseña</label>
+                                <input id="login-password" type="password" name="password"
+                                    autocomplete="current-password">
+                            </div>
+
+                            <div class="form-pie">
+                                <div class="form-pie__item">
+                                    <input type="checkbox" id="login-remember" name="remember">
+                                    <label for="login-remember">Recordarme</label>
+                                </div>
+                                <div class="form-pie__item">
+                                    <a class="auth-forgot" href="#">¿Olvidaste tu contraseña?</a>
+                                </div>
+
+                            </div>
+                            <button class="button button--primary auth-submit" type="submit">Iniciar sesión</button>
+                            <div class="auth-switch">
+                                <p>¿No tenés cuenta?</p>
+                                <a href="/users/register">Registrate</a>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <%- include('../partials/newsletter.ejs') %>
+            </main>
+
+            <%- include('../partials/footer.ejs') %>
+    </body>
+
+</html>
