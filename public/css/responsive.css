@@ -545,6 +545,16 @@
         box-shadow: var(--shadow-sm);
     }
 
+    .profile-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .profile-card form {
+        grid-column: auto;
+    }
+
     .form-field {
         margin-bottom: 18px;
     }

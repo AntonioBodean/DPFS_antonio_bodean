@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+        <%- include('../partials/header.ejs') %>
+
+            <main id="contenido-principal" class="auth-main">
+                <section class="auth-section profile-section" aria-labelledby="profile-title">
+                    <div class="container auth-section__content">
+                        <header class="auth-heading">
+                            <p class="eyebrow">Tu cuenta</p>
+                            <h1 id="profile-title">Mi perfil</h1>
+                            <p>Estos son los datos asociados a tu cuenta.</p>
+                        </header>
+
+                        <article class="auth-card profile-card">
+                            <img class="profile-card__avatar" src="<%= user.image %>"
+                                alt="Imagen de perfil de <%= user.firstName %>">
+                            <div class="profile-card__data">
+                                <h2><%= user.firstName %> <%= user.lastName %></h2>
+                                <p><strong>Correo:</strong> <%= user.email %></p>
+                                <% if (user.phone) { %><p><strong>Teléfono:</strong> <%= user.phone %></p><% } %>
+                                <p><strong>Tipo de cuenta:</strong> <%= user.category === 'Admin' ? 'Administrador' : 'Cliente' %></p>
+                            </div>
+                            <form action="/users/logout" method="post">
+                                <button class="button button--danger" type="submit">Cerrar sesión</button>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <%- include('../partials/newsletter.ejs') %>
+            </main>
+
+            <%- include('../partials/footer.ejs') %>
+    </body>
+
+</html>

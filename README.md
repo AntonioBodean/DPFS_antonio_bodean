@@ -70,7 +70,7 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades implementadas
 
-Durante los primeros cuatro sprints se implementaron:
+Durante los primeros cinco sprints se implementaron:
 
 - Página de inicio responsive.
 - Listado y página de detalle generados desde datos JSON.
@@ -83,6 +83,9 @@ Durante los primeros cuatro sprints se implementaron:
 - Rutas y controladores separados por dominio.
 - Componentes reutilizables mediante parciales de EJS.
 - Archivos CSS e imágenes servidos desde la carpeta `public`.
+- Registro con avatar y contraseñas cifradas mediante bcryptjs.
+- Login, perfil, logout, sesiones y opción «Recordarme».
+- Middlewares para rutas exclusivas de huéspedes y usuarios autenticados.
 
 Los formularios de productos guardan sus cambios en `src/data/products.json`. Esta persistencia con archivos es temporal y será reemplazada por una base de datos relacional en un sprint posterior.
 
@@ -112,6 +115,13 @@ Los formularios de productos guardan sus cambios en `src/data/products.json`. Es
 - Method Override para formularios HTML
 - Pruebas de integración con el módulo nativo `node:test`
 
+### Sprint 5
+
+- bcryptjs
+- Express Session
+- Cookie Parser
+- Middlewares de aplicación y de ruta
+
 ### Herramientas
 
 - Git
@@ -140,7 +150,12 @@ ConstruMarket/
 │   │   ├── products.json
 │   │   └── users.json
 │   ├── models/
-│   │   └── Product.js
+│   │   ├── Product.js
+│   │   └── User.js
+│   ├── middlewares/
+│   │   ├── authMiddleware.js
+│   │   ├── guestMiddleware.js
+│   │   └── rememberUserMiddleware.js
 │   ├── routes/
 │   │   ├── mainRoutes.js
 │   │   ├── productRoutes.js
@@ -162,9 +177,11 @@ ConstruMarket/
 │       │   └── edit.ejs
 │       └── users/
 │           ├── login.ejs
-│           └── register.ejs
+│           ├── register.ejs
+│           └── profile.ejs
 ├── test/
-│   └── sprint4.test.js
+│   ├── sprint4.test.js
+│   └── sprint5.test.js
 ├── views/
 ├── retro.md
 ├── package.json
@@ -190,6 +207,10 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 | GET | `/products/cart` | Carrito de compras |
 | GET | `/users/login` | Inicio de sesión |
 | GET | `/users/register` | Registro de usuario |
+| POST | `/users/register` | Creación de usuario |
+| POST | `/users/login` | Autenticación de usuario |
+| GET | `/users/profile` | Perfil (requiere login) |
+| POST | `/users/logout` | Cierre de sesión |
 
 ---
 
@@ -265,6 +286,10 @@ El seguimiento del Sprint 3 se encuentra en el [tablero de GitHub Projects](http
 
 El seguimiento del Sprint 4 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/3).
 
+### Sprint 5
+
+El seguimiento del Sprint 5 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/4)
+
 ---
 
 ## Estado del proyecto
@@ -276,3 +301,5 @@ Sprint 2 entregado.
 Sprint 3 entregado.
 
 Sprint 4 implementado: productos y usuarios definidos en JSON, contenido dinámico y administración completa de productos con listado, detalle, creación, edición y eliminación.
+
+Sprint 5 implementado: registro, login, perfil, logout, sesiones, cookie «Recordarme» y protección de rutas por estado de autenticación.

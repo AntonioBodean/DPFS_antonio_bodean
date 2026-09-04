@@ -16,16 +16,19 @@
                             <h1 id="login-title">Iniciar sesión</h1>
                             <p>Ingresá tus datos para continuar con tus compras.</p>
                         </header>
-                        <form class="auth-card" action="#" method="post">
+                        <form class="auth-card" action="/users/login" method="post">
+                            <% if (errors.credentials) { %>
+                                <p class="form-alert" role="alert"><%= errors.credentials %></p>
+                            <% } %>
                             <div class="form-field">
                                 <label for="login-email">Correo electrónico</label>
                                 <input id="login-email" type="email" name="email" autocomplete="email" inputmode="email"
-                                    placeholder="nombre@correo.com">
+                                    placeholder="nombre@correo.com" value="<%= oldData.email || '' %>" required>
                             </div>
                             <div class="form-field">
                                 <label for="login-password">Contraseña</label>
                                 <input id="login-password" type="password" name="password"
-                                    autocomplete="current-password">
+                                    autocomplete="current-password" required>
                             </div>
 
                             <div class="form-pie">

@@ -16,45 +16,57 @@
                             <p>Completá tus datos para empezar a comprar todo para tu obra.</p>
                         </header>
 
-                        <form class="auth-card" action="#" method="post">
+                        <form class="auth-card" action="/users/register" method="post" enctype="multipart/form-data">
                             <div class="form-field">
-                                <label for="full-name" class="form-field__label">Nombre completo</label>
-                                <input required id="full-name" class="form-field__error" type="text" name="fullName"
-                                    autocomplete="name" placeholder="Ej.: Ana Martínez">
-                                <small id="full-name-help" class="form-field__error">El nombre completo debe contener al
-                                    menos 3 caracteres.</small>
+                                <label for="first-name">Nombre</label>
+                                <input required id="first-name" class="<%= errors.firstName ? 'form-field__error' : '' %>"
+                                    type="text" name="firstName" autocomplete="given-name" placeholder="Ej.: Ana"
+                                    value="<%= oldData.firstName || '' %>">
+                                <% if (errors.firstName) { %><small class="form-field__error"><%= errors.firstName %></small><% } %>
+                            </div>
+                            <div class="form-field">
+                                <label for="last-name">Apellido</label>
+                                <input required id="last-name" class="<%= errors.lastName ? 'form-field__error' : '' %>"
+                                    type="text" name="lastName" autocomplete="family-name" placeholder="Ej.: Martínez"
+                                    value="<%= oldData.lastName || '' %>">
+                                <% if (errors.lastName) { %><small class="form-field__error"><%= errors.lastName %></small><% } %>
                             </div>
                             <div class="form-field">
                                 <label for="register-email">Correo electrónico</label>
-                                <input id="register-email" class="form-field__error" type="email" name="email"
-                                    autocomplete="email" inputmode="email" placeholder="nombre@correo.com">
-                                <small id="register-email-help" class="form-field__error">El correo electrónico no es
-                                    válido.</small>
+                                <input required id="register-email" class="<%= errors.email ? 'form-field__error' : '' %>"
+                                    type="email" name="email" autocomplete="email" inputmode="email"
+                                    placeholder="nombre@correo.com" value="<%= oldData.email || '' %>">
+                                <% if (errors.email) { %><small class="form-field__error"><%= errors.email %></small><% } %>
                             </div>
                             <div class="form-field">
                                 <label for="phone">Teléfono <span>(opcional)</span></label>
-                                <input id="phone" class="form-field__error" type="tel" name="phone" autocomplete="tel"
-                                    inputmode="tel" placeholder="Ej.: 11 2345 6789">
-                                <small id="phone-help" class="form-field__error">El teléfono no es válido.</small>
+                                <input id="phone" type="tel" name="phone" autocomplete="tel" inputmode="tel"
+                                    placeholder="Ej.: 11 2345 6789" value="<%= oldData.phone || '' %>">
+                            </div>
+                            <div class="form-field">
+                                <label for="profile-image">Imagen de perfil</label>
+                                <input required id="profile-image" class="<%= errors.image ? 'form-field__error' : '' %>"
+                                    type="file" name="image" accept="image/*">
+                                <% if (errors.image) { %><small class="form-field__error"><%= errors.image %></small><% } %>
                             </div>
                             <div class="form-field">
                                 <label for="register-password">Contraseña</label>
                                 <input id="register-password" type="password" name="password"
-                                    autocomplete="new-password" aria-describedby="password-help">
-                                <small id="password-help">Usá al menos 8 caracteres.</small>
+                                    autocomplete="new-password" aria-describedby="password-help" required>
+                                <small id="password-help" class="<%= errors.password ? 'form-field__error' : '' %>"><%= errors.password || 'Usá al menos 8 caracteres.' %></small>
                             </div>
                             <div class="form-field">
                                 <label for="confirm-password">Confirmar contraseña</label>
-                                <input id="confirm-password" class="form-field__error" type="password"
-                                    name="confirmPassword" autocomplete="new-password">
-                                <small id="confirm-password-help" class="form-field__error">Las contraseñas no
-                                    coinciden.</small>
+                                <input id="confirm-password" class="<%= errors.confirmPassword ? 'form-field__error' : '' %>"
+                                    type="password" name="confirmPassword" autocomplete="new-password" required>
+                                <% if (errors.confirmPassword) { %><small class="form-field__error"><%= errors.confirmPassword %></small><% } %>
                             </div>
                             <label class="checkbox-field">
-                                <input type="checkbox" name="terms">
+                                <input type="checkbox" name="terms" <%= oldData.terms ? 'checked' : '' %> required>
                                 <span>Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de
                                         privacidad</a>.</span>
                             </label>
+                            <% if (errors.terms) { %><p class="field-message form-field__error"><%= errors.terms %></p><% } %>
                             <button class="button button--primary auth-submit" type="submit">Crear cuenta</button>
                             <div class="auth-switch">
                                 <p>¿Ya tenés cuenta?</p>

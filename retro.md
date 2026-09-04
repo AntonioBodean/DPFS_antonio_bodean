@@ -57,3 +57,29 @@
 
 - Intentar diseñar una página completa de una sola vez.
 - Repetir código cuando una sección puede convertirse en un componente reutilizable.
+
+---
+
+# Retrospectiva Sprint 5
+
+## Qué hice bien
+
+- Separé la persistencia, los controladores y los middlewares de usuarios.
+- Reutilicé el estado de sesión desde un middleware de aplicación para personalizar todas las vistas.
+- Incorporé pruebas de integración para los recorridos principales de autenticación.
+
+## Qué dificultades tuve
+
+- Coordinar sesiones y cookies para que la opción «Recordarme» funcione sin exponer la contraseña.
+- Mantener los datos ingresados y mostrar errores claros cuando falla el registro o el login.
+
+## Qué debería continuar haciendo
+
+- Probar tanto los casos exitosos como los errores y accesos no autorizados.
+- Guardar secretos configurables mediante variables de entorno.
+- Mantener responsabilidades pequeñas y bien separadas.
+
+## Qué debería mejorar
+
+- Incorporar una base de datos para evitar escrituras concurrentes sobre archivos JSON.
+- Usar un almacén persistente de sesiones antes de llevar la aplicación a producción.

@@ -16,8 +16,12 @@
                     <a href="/#categorias">Categorías</a>
                     <a href="/products">Productos</a>
                     <a href="/#promociones">Ofertas</a>
-                    <a href="/users/login">Ingresar</a>
-                    <a href="/users/register">Crear cuenta</a>
+                    <% if (loggedUser) { %>
+                        <a href="/users/profile">Mi perfil</a>
+                    <% } else { %>
+                        <a href="/users/login">Ingresar</a>
+                        <a href="/users/register">Crear cuenta</a>
+                    <% } %>
                 </nav>
             </details>
 
@@ -32,9 +36,9 @@
             </form>
 
             <nav class="header-actions" aria-label="Accesos de usuario">
-                <a href="/users/login" class="header-action">
+                <a href="<%= loggedUser ? '/users/profile' : '/users/login' %>" class="header-action">
                     <span class="header-action__icon" aria-hidden="true">●</span>
-                    <span><small>Hola</small>Ingresar</span>
+                    <span><small>Hola<%= loggedUser ? `, ${loggedUser.firstName}` : '' %></small><%= loggedUser ? 'Mi perfil' : 'Ingresar' %></span>
                 </a>
                 <a href="/products/cart" class="header-action header-action--cart">
                     <span class="cart-icon" aria-hidden="true">▰</span>
@@ -55,7 +59,11 @@
                 <li><a href="/products">Productos</a></li>
                 <li><a href="/#promociones">Ofertas</a></li>
                 <li><a href="/#beneficios">Servicios</a></li>
-                <li><a href="/users/register">Crear cuenta</a></li>
+                <% if (loggedUser) { %>
+                    <li><a href="/users/profile">Mi perfil</a></li>
+                <% } else { %>
+                    <li><a href="/users/register">Crear cuenta</a></li>
+                <% } %>
                 <li><a href="#ayuda">Ayuda</a></li>
             </ul>
         </div>

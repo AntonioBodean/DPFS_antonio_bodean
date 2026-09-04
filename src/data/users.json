@@ -4,7 +4,7 @@
     "firstName": "amet consectetuer",
     "lastName": "nec sem",
     "email": "efalconertaylor0@miibeian.gov.cn",
-    "password": "vI7'&W`D_Fb+udtf",
+    "password": "$2b$10$Q3Qr6rVul.Pp7t16awdd7eDRF0gtrGZ/criNM2ytwWxCz23H8kzTW",
     "category": "Customer",
     "image": "/images/avatars/jala.jpg"
   },
@@ -13,7 +13,7 @@
     "firstName": "ipsum primis",
     "lastName": "et commodo",
     "email": "efloch1@gizmodo.com",
-    "password": "bH2>JG%)",
+    "password": "$2b$10$B50hPDIm1gcHy73saztQq.0yfU4qqSWGilkPLkwDS69PSZHQTtAMy",
     "category": "Admin",
     "image": "/images/avatars/kipa.jpg"
   },
@@ -22,7 +22,7 @@
     "firstName": "lorem",
     "lastName": "porttitor id",
     "email": "cshewsmith2@twitpic.com",
-    "password": "zJ2.{~Z&`g",
+    "password": "$2b$10$w3aZ9gLY3nMOcUSEATqaYOivPOLzsrkuMC57.DiXU2MkRUudVvWCy",
     "category": "Admin",
     "image": "/images/avatars/polloCorazon.jpg"
   },
@@ -31,7 +31,7 @@
     "firstName": "risus semper",
     "lastName": "lacus",
     "email": "mdrable3@fema.gov",
-    "password": "dE6+a3=*(k",
+    "password": "$2b$10$5FutF/JkuAK5pViDCkMV3.Rz2M/OLbAef3bZy8jd2iwjuYnBPzmwK",
     "category": "Admin",
     "image": "/images/avatars/pletzale.jpg"
   },
@@ -40,7 +40,7 @@
     "firstName": "mi",
     "lastName": "dolor quis",
     "email": "dyegorkin4@friendfeed.com",
-    "password": "nZ0>NonRx",
+    "password": "$2b$10$im3xwXZsewS10q/YS8PzQuS9uFJL0wOEApgdgxQvtS0h58kfZhm0W",
     "category": "Admin",
     "image": "/images/avatars/jala.jpg"
   },
@@ -49,7 +49,7 @@
     "firstName": "curae",
     "lastName": "nulla nunc",
     "email": "pwoodfin5@youtube.com",
-    "password": "uD9`S6Q~Dk'",
+    "password": "$2b$10$KsL.5k3J23wNiqityEwM4.WQrexEzMSSI4oJ/v6Gv.LDTaqBb4SkG",
     "category": "Admin",
     "image": ""
   },
@@ -58,7 +58,7 @@
     "firstName": "massa",
     "lastName": "a libero",
     "email": "bescott6@unesco.org",
-    "password": "rZ1'#2jWIF3,5P",
+    "password": "$2b$10$KT3jXbB8BJ4jNZKNonexfuhdB4iPpSSf9JbFjdpuqPoKWo1ucZpeG",
     "category": "Admin",
     "image": "/images/avatars/polloCorazon.jpg"
   },
@@ -67,7 +67,7 @@
     "firstName": "orci",
     "lastName": "bibendum felis",
     "email": "jdohr7@friendfeed.com",
-    "password": "sQ1_<oT=v",
+    "password": "$2b$10$lg1bT6IJQjRFNVXSEoUCwONjZH/tY20lPpJIqh/fD00NJnTRw2SP.",
     "category": "Customer",
     "image": "/images/avatars/pretzel.jpg"
   },
@@ -76,7 +76,7 @@
     "firstName": "turpis eget",
     "lastName": "morbi",
     "email": "hbretton8@multiply.com",
-    "password": "eL1.{3GM|%FJNm",
+    "password": "$2b$10$Z5kwp9hvyxTai3hzSBgUs.9FRCnq2/lmTHLCLu9cvX3LegvmwFbv2",
     "category": "Customer",
     "image": "/images/avatars/pletzale.jpg"
   },
@@ -85,8 +85,18 @@
     "firstName": "et",
     "lastName": "diam erat",
     "email": "lmomery9@yandex.ru",
-    "password": "nZ1)=GmR$",
+    "password": "$2b$10$MUzDwdcemIOCtYc5oaNvp.NmzzwoxpG3gMc9IjWnzTuo54Vc0b3u.",
     "category": "Admin",
     "image": "/images/avatars/jala.jpg"
+  },
+  {
+    "id": 11,
+    "firstName": "Toto",
+    "lastName": "Bodean",
+    "email": "toto@bodean.com.ar",
+    "phone": "3454236820",
+    "password": "$2b$10$CQVOmjNr50vFl/7kaz6xVeCumj4kQ6VANiV49SrN589AkciLRgFJ6",
+    "category": "Customer",
+    "image": "/images/users/1788562463250-855249312.png"
   }
 ]
