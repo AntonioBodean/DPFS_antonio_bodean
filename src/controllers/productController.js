@@ -1,53 +1,40 @@
-const products = [
-    {
-        id: 1,
-        name: 'Cemento Portland 25 kg',
-        category: 'Materiales',
-        price: 18900,
-        image: 'cemento.jpg'
-    },
-    {
-        id: 2,
-        name: 'Ladrillo hueco 12 × 18 × 33 cm',
-        category: 'Materiales',
-        price: 1250,
-        image: 'ladrillo.jpg'
-    },
-    {
-        id: 3,
-        name: 'Amoladora angular 850 W',
-        category: 'Herramientas',
-        price: 84990,
-        image: 'amoladora.jpg'
-    },
-    {
-        id: 4,
-        name: 'Pintura látex interior 20 L',
-        category: 'Pinturas',
-        price: 68500,
-        image: 'latex.jpg'
-    },
-    {
-        id: 5,
-        name: 'Taladro percutor 700 W',
-        category: 'Herramientas',
-        price: 96300,
-        image: 'taladro.jpg'
-    },
-    {
-        id: 6,
-        name: 'Hierro redondo liso 10 mm',
-        category: 'Hierros',
-        price: 18750,
-        image: 'hierro.jpg'
-    }
-];
+const Product = require('../models/Product');
+
+function renderProductNotFound(res) {
+    return res.status(404).render('errors/404', {
+        title: 'Producto no encontrado | ConstruMarket',
+        heading: 'Producto no encontrado',
+        message: 'El producto que buscás no existe o fue eliminado.',
+        backUrl: '/products',
+        backLabel: 'Volver a productos'
+    });
+}
+
+function normalizeColors(colors = '') {
+    return colors
+        .split(',')
+        .map(color => color.trim())
+        .filter(Boolean);
+}
+
+function buildProductData(body, image) {
+    return {
+        name: body.name.trim(),
+        description: body.description.trim(),
+        image,
+        category: body.category,
+        colors: normalizeColors(body.colors),
+        price: Number(body.price),
+        brand: body.brand.trim(),
+        stock: Number(body.stock)
+    };
+}
 
 const productController = {
     list: (req, res) => {
         res.render('products/list', {
             title: 'Productos | ConstruMarket',
-            products: products
+            products: Product.findAll()
         });
     },
 
@@ -57,24 +44,65 @@ const productController = {
         });
     },
 
-    edit: (req, res) => {
-        const productId = Number(req.params.id);
-        const product = products.find(p => p.id === productId);
+    store: (req, res) => {
+        const image = req.file ? req.file.filename : 'construmarket-logo.png';
+        Product.create(buildProductData(req.body, image));
+
+        return res.redirect('/products');
+    },
+
+    detail: (req, res) => {
+        const product = Product.findById(req.params.id);
 
         if (!product) {
-            return res.status(404).send('Producto no encontrado');
+            return renderProductNotFound(res);
+        }
+
+        const relatedProducts = Product.findAll()
+            .filter(item => item.id !== product.id && item.category === product.category)
+            .slice(0, 4);
+
+        return res.render('products/detail', {
+            title: `${product.name} | ConstruMarket`,
+            product,
+            relatedProducts
+        });
+    },
+
+    edit: (req, res) => {
+        const product = Product.findById(req.params.id);
+
+        if (!product) {
+            return renderProductNotFound(res);
         }
 
         return res.render('products/edit', {
             title: 'Editar producto | ConstruMarket',
-            product: product
+            product
         });
     },
 
-    detail: (req, res) => {
-        res.render('products/detail', {
-            title: 'Cemento Portland 25 kg | ConstruMarket'
-        });
+    update: (req, res) => {
+        const currentProduct = Product.findById(req.params.id);
+
+        if (!currentProduct) {
+            return renderProductNotFound(res);
+        }
+
+        const image = req.file ? req.file.filename : currentProduct.image;
+        Product.update(req.params.id, buildProductData(req.body, image));
+
+        return res.redirect(`/products/${req.params.id}`);
+    },
+
+    destroy: (req, res) => {
+        const wasDeleted = Product.delete(req.params.id);
+
+        if (!wasDeleted) {
+            return renderProductNotFound(res);
+        }
+
+        return res.redirect('/products');
     },
 
     cart: (req, res) => {

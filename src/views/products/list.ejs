@@ -51,12 +51,13 @@
                                             </p>
 
                                             <div class="product-card__actions">
-                                                <a class="button button--secondary" href="/products/detail">
+                                                <a class="button button--secondary"
+                                                    href="/products/<%= product.id %>">
                                                     Ver producto
                                                 </a>
 
                                                 <a class="button button--primary"
-                                                    href="/products/edit/<%= product.id %>">
+                                                    href="/products/<%= product.id %>/edit">
                                                     Editar
                                                 </a>
                                             </div>

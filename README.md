@@ -70,20 +70,21 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades implementadas
 
-Durante los primeros tres sprints se implementaron:
+Durante los primeros cuatro sprints se implementaron:
 
 - Página de inicio responsive.
-- Listado dinámico de productos.
-- Página de detalle de producto.
+- Listado y página de detalle generados desde datos JSON.
 - Carrito de compras.
 - Formularios de registro e inicio de sesión.
-- Formulario de creación de productos.
-- Formulario de edición con datos precargados.
+- Creación, edición y eliminación persistente de productos.
+- Carga de imágenes para productos mediante Multer.
+- Simulación de los métodos PUT y DELETE mediante Method Override.
+- Archivos JSON iniciales para productos y usuarios.
 - Rutas y controladores separados por dominio.
 - Componentes reutilizables mediante parciales de EJS.
 - Archivos CSS e imágenes servidos desde la carpeta `public`.
 
-Los formularios todavía no guardan información de manera permanente. La persistencia de datos y el procesamiento completo se implementarán en próximos sprints.
+Los formularios de productos guardan sus cambios en `src/data/products.json`. Esta persistencia con archivos es temporal y será reemplazada por una base de datos relacional en un sprint posterior.
 
 ---
 
@@ -101,6 +102,15 @@ Los formularios todavía no guardan información de manera permanente. La persis
 - Express.js
 - EJS
 - Arquitectura basada en rutas, controladores y vistas
+
+### Sprint 4
+
+- Persistencia mediante archivos JSON
+- CRUD completo de productos
+- Métodos HTTP GET, POST, PUT y DELETE
+- Multer para carga de imágenes
+- Method Override para formularios HTML
+- Pruebas de integración con el módulo nativo `node:test`
 
 ### Herramientas
 
@@ -126,12 +136,19 @@ ConstruMarket/
 │   │   ├── mainController.js
 │   │   ├── productController.js
 │   │   └── userController.js
+│   ├── data/
+│   │   ├── products.json
+│   │   └── users.json
+│   ├── models/
+│   │   └── Product.js
 │   ├── routes/
 │   │   ├── mainRoutes.js
 │   │   ├── productRoutes.js
 │   │   └── userRoutes.js
 │   └── views/
 │       ├── index.ejs
+│       ├── errors/
+│       │   └── 404.ejs
 │       ├── partials/
 │       │   ├── head.ejs
 │       │   ├── header.ejs
@@ -146,6 +163,8 @@ ConstruMarket/
 │       └── users/
 │           ├── login.ejs
 │           └── register.ejs
+├── test/
+│   └── sprint4.test.js
 ├── views/
 ├── retro.md
 ├── package.json
@@ -158,16 +177,19 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 
 ## Rutas principales
 
-| Ruta | Descripción |
-|---|---|
-| `/` | Página de inicio |
-| `/products` | Listado de productos |
-| `/products/detail` | Detalle de producto |
-| `/products/cart` | Carrito de compras |
-| `/products/create` | Formulario de creación |
-| `/products/edit/:id` | Formulario de edición |
-| `/users/login` | Inicio de sesión |
-| `/users/register` | Registro de usuario |
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/` | Página de inicio |
+| GET | `/products` | Listado de productos |
+| GET | `/products/create` | Formulario de creación |
+| GET | `/products/:id` | Detalle de un producto |
+| POST | `/products` | Creación de un producto |
+| GET | `/products/:id/edit` | Formulario de edición |
+| PUT | `/products/:id` | Actualización de un producto |
+| DELETE | `/products/:id` | Eliminación de un producto |
+| GET | `/products/cart` | Carrito de compras |
+| GET | `/users/login` | Inicio de sesión |
+| GET | `/users/register` | Registro de usuario |
 
 ---
 
@@ -231,10 +253,26 @@ Los recursos utilizados por la aplicación se encuentran en `public/images/`.
 
 ## Tablero de trabajo
 
-El seguimiento del Sprint 3 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/2/views/1).
+### Sprint 2
+
+El seguimiento del Sprint 2 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/1).
+
+### Sprint 3
+
+El seguimiento del Sprint 3 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/2).
+
+### Sprint 4
+
+El seguimiento del Sprint 4 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/3).
 
 ---
 
 ## Estado del proyecto
 
-Sprint 3 completado: aplicación migrada a Node.js, Express y EJS, con rutas, controladores, vistas organizadas, contenido dinámico, parciales reutilizables y formularios de administración de productos.
+Sprint 1 entregado.
+
+Sprint 2 entregado.
+
+Sprint 3 entregado.
+
+Sprint 4 implementado: productos y usuarios definidos en JSON, contenido dinámico y administración completa de productos con listado, detalle, creación, edición y eliminación.

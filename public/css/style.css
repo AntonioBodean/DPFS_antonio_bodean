@@ -184,6 +184,15 @@ h3 {
     background: var(--color-primary-dark);
 }
 
+.button--danger {
+    color: var(--color-white);
+    background: var(--color-error);
+}
+
+.button--danger:hover {
+    background: #c62828;
+}
+
 /* Header ------------------------------------------------------------------- */
 .site-header {
     position: relative;
@@ -1483,6 +1492,11 @@ h3 {
     text-align: center;
 }
 
+.auth-switch--cancel {
+    margin-top: 10px;
+    border-top: none;
+}
+
 .auth-switch p {
     margin-bottom: 8px;
     color: var(--color-text-soft);
@@ -1723,9 +1737,48 @@ select {
 .product-card__actions {
     display: grid;
     gap: 10px;
-    margin-top: auto;
+    margin-top: 20px;
 }
 
 .product-card__actions .button {
     width: 100%;
+}
+
+.delete-product-form {
+    width: min(100%, 500px);
+    margin-top: 20px;
+}
+
+button.button--danger.button--full {
+    width: 100%;
+}
+
+/* Error pages ------------------------------------------------------------- */
+
+.error-page {
+    display: grid;
+    min-height: 60vh;
+    place-items: center;
+    padding-block: 64px;
+    text-align: center;
+}
+
+.error-page__content {
+    max-width: 680px;
+}
+
+.error-page__code {
+    margin-bottom: 8px;
+    color: var(--color-primary-light);
+    font-family: var(--font-heading);
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 800;
+    line-height: 0.8;
+}
+
+.error-page__message {
+    max-width: 520px;
+    margin: 16px auto 28px;
+    color: var(--color-text-soft);
+    font-size: 1.1rem;
 }

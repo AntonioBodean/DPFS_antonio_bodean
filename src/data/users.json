@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "firstName": "amet consectetuer",
+    "lastName": "nec sem",
+    "email": "efalconertaylor0@miibeian.gov.cn",
+    "password": "vI7'&W`D_Fb+udtf",
+    "category": "Customer",
+    "image": "/images/avatars/jala.jpg"
+  },
+  {
+    "id": 2,
+    "firstName": "ipsum primis",
+    "lastName": "et commodo",
+    "email": "efloch1@gizmodo.com",
+    "password": "bH2>JG%)",
+    "category": "Admin",
+    "image": "/images/avatars/kipa.jpg"
+  },
+  {
+    "id": 3,
+    "firstName": "lorem",
+    "lastName": "porttitor id",
+    "email": "cshewsmith2@twitpic.com",
+    "password": "zJ2.{~Z&`g",
+    "category": "Admin",
+    "image": "/images/avatars/polloCorazon.jpg"
+  },
+  {
+    "id": 4,
+    "firstName": "risus semper",
+    "lastName": "lacus",
+    "email": "mdrable3@fema.gov",
+    "password": "dE6+a3=*(k",
+    "category": "Admin",
+    "image": "/images/avatars/pletzale.jpg"
+  },
+  {
+    "id": 5,
+    "firstName": "mi",
+    "lastName": "dolor quis",
+    "email": "dyegorkin4@friendfeed.com",
+    "password": "nZ0>NonRx",
+    "category": "Admin",
+    "image": "/images/avatars/jala.jpg"
+  },
+  {
+    "id": 6,
+    "firstName": "curae",
+    "lastName": "nulla nunc",
+    "email": "pwoodfin5@youtube.com",
+    "password": "uD9`S6Q~Dk'",
+    "category": "Admin",
+    "image": ""
+  },
+  {
+    "id": 7,
+    "firstName": "massa",
+    "lastName": "a libero",
+    "email": "bescott6@unesco.org",
+    "password": "rZ1'#2jWIF3,5P",
+    "category": "Admin",
+    "image": "/images/avatars/polloCorazon.jpg"
+  },
+  {
+    "id": 8,
+    "firstName": "orci",
+    "lastName": "bibendum felis",
+    "email": "jdohr7@friendfeed.com",
+    "password": "sQ1_<oT=v",
+    "category": "Customer",
+    "image": "/images/avatars/pretzel.jpg"
+  },
+  {
+    "id": 9,
+    "firstName": "turpis eget",
+    "lastName": "morbi",
+    "email": "hbretton8@multiply.com",
+    "password": "eL1.{3GM|%FJNm",
+    "category": "Customer",
+    "image": "/images/avatars/pletzale.jpg"
+  },
+  {
+    "id": 10,
+    "firstName": "et",
+    "lastName": "diam erat",
+    "email": "lmomery9@yandex.ru",
+    "password": "nZ1)=GmR$",
+    "category": "Admin",
+    "image": "/images/avatars/jala.jpg"
+  }
+]

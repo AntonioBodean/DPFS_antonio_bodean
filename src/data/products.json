@@ -1,0 +1,89 @@
+[
+  {
+    "id": 1,
+    "name": "Cemento Portland 25 kg",
+    "description": "Cemento Portland compuesto CPC40 para trabajos de construcción, albañilería y reparación. Ofrece muy buena resistencia y trabajabilidad.",
+    "image": "cemento.jpg",
+    "category": "Materiales",
+    "colors": [],
+    "price": 9000,
+    "brand": "Loma Negra",
+    "stock": 48
+  },
+  {
+    "id": 2,
+    "name": "Ladrillo hueco 12 × 18 × 33 cm",
+    "description": "Ladrillo cerámico liviano con buena aislación térmica, ideal para paredes interiores y exteriores.",
+    "image": "ladrillo.jpg",
+    "category": "Materiales",
+    "colors": [
+      "Terracota"
+    ],
+    "price": 1250,
+    "brand": "CORMELA",
+    "stock": 130
+  },
+  {
+    "id": 3,
+    "name": "Amoladora angular 850 W",
+    "description": "Amoladora compacta y potente con disco de 115 mm y empuñadura lateral para cortes y desbastes.",
+    "image": "amoladora.jpg",
+    "category": "Herramientas",
+    "colors": [
+      "Amarillo",
+      "Negro"
+    ],
+    "price": 84990,
+    "brand": "Nortool",
+    "stock": 7
+  },
+  {
+    "id": 5,
+    "name": "Taladro percutor 700 W",
+    "description": "Taladro eléctrico con velocidad variable, mandril de 13 mm, función reversa y modo percutor.",
+    "image": "taladro.jpg",
+    "category": "Herramientas",
+    "colors": [
+      "Amarillo",
+      "Negro"
+    ],
+    "price": 96300,
+    "brand": "Nortool",
+    "stock": 16
+  },
+  {
+    "id": 6,
+    "name": "Hierro redondo liso 10 mm",
+    "description": "Barra maciza de acero de 10 mm para herrería, refuerzos y trabajos generales de obra.",
+    "image": "1788486776210-605359111.jpg",
+    "category": "Hierros",
+    "colors": [
+      "Acero"
+    ],
+    "price": 18750,
+    "brand": "ACINDAR",
+    "stock": 82
+  },
+  {
+    "id": 7,
+    "name": "PLASTICOR cemento de albañilería x 25 kg.",
+    "description": "",
+    "image": "1788486277960-259924126.jpg",
+    "category": "Materiales",
+    "colors": [],
+    "price": 8200,
+    "brand": "LOMA NEGRA",
+    "stock": 100
+  },
+  {
+    "id": 8,
+    "name": "Disco de Corte 2 en 1 Secur Extra TYROLIT 114 x 1,0 x 22,23",
+    "description": "Estos productos son diseñados para el corte de planchuelas, chapas, perfiles, tubos de acero y fundición. Estos materiales son fácilmente cortados con menor desperdicio de material, superficies más limpias, mínimas rebabas y cortes más rápidos.",
+    "image": "1788486540665-563868540.jpeg",
+    "category": "Materiales",
+    "colors": [],
+    "price": 5000,
+    "brand": "TYROLIT",
+    "stock": 5
+  }
+]
