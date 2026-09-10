@@ -7,7 +7,7 @@
                     <span class="sr-only">Menú</span>
                 </summary>
                 <nav class="mobile-menu__panel" aria-label="Navegación móvil">
-                    <form class="mobile-search" action="#" role="search">
+                    <form class="mobile-search" action="/products" method="get" role="search">
                         <label class="sr-only" for="mobile-search">Buscar productos</label>
                         <input id="mobile-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
                         <button type="submit">Buscar</button>
@@ -29,7 +29,7 @@
                 <img src="/images/construmarket-logo.png" alt="ConstruMarket, todo para tu obra en un solo lugar">
             </a>
 
-            <form class="header-search" action="#" role="search">
+            <form class="header-search" action="/products" method="get" role="search">
                 <label class="sr-only" for="desktop-search">Buscar productos</label>
                 <input id="desktop-search" type="search" name="q" placeholder="¿Qué necesitás para tu obra?">
                 <button type="submit" aria-label="Buscar">Buscar</button>
@@ -61,6 +61,7 @@
                 <li><a href="/#beneficios">Servicios</a></li>
                 <% if (loggedUser) { %>
                     <li><a href="/users/profile">Mi perfil</a></li>
+                    <li><a href="/users">Usuarios</a></li>
                 <% } else { %>
                     <li><a href="/users/register">Crear cuenta</a></li>
                 <% } %>

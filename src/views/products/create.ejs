@@ -41,12 +41,11 @@
 
                                 <div class="form-field">
                                     <label for="product-category">Categoría</label>
-                                    <select id="product-category" name="category" required>
+                                    <select id="product-category" name="categoryId" required>
                                         <option value="">Seleccioná una categoría</option>
-                                        <option value="Materiales">Materiales</option>
-                                        <option value="Herramientas">Herramientas</option>
-                                        <option value="Pinturas">Pinturas</option>
-                                        <option value="Hierros">Hierros</option>
+                                        <% categories.forEach(category => { %>
+                                            <option value="<%= category.id %>"><%= category.name %></option>
+                                        <% }) %>
                                     </select>
                                 </div>
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+    <%- include('../partials/header.ejs') %>
+    <main id="contenido-principal" class="auth-main">
+        <section class="auth-section profile-section">
+            <div class="container auth-section__content">
+                <header class="auth-heading"><p class="eyebrow">Administración</p><h1>Detalle de usuario</h1></header>
+                <article class="auth-card profile-card">
+                    <img class="profile-card__avatar" src="<%= user.image %>" alt="Avatar de <%= user.firstName %>">
+                    <div class="profile-card__data"><h2><%= user.firstName %> <%= user.lastName %></h2>
+                        <p><strong>Correo:</strong> <%= user.email %></p>
+                        <% if (user.phone) { %><p><strong>Teléfono:</strong> <%= user.phone %></p><% } %>
+                        <p><strong>Tipo de cuenta:</strong> <%= user.category === 'Admin' ? 'Administrador' : 'Cliente' %></p>
+                    </div>
+                    <div class="profile-actions"><a class="button button--primary" href="/users/<%= user.id %>/edit">Editar</a>
+                        <a class="button button--secondary" href="/users">Volver</a></div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

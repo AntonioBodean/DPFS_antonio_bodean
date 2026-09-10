@@ -282,8 +282,33 @@
 
     .products-grid,
     .benefits__grid,
-    .brands__grid {
+    .brands__grid,
+    .users-grid {
         grid-template-columns: 1fr;
+    }
+
+    .catalog-search {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .catalog-search input,
+    .catalog-search .button {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .user-card {
+        grid-template-columns: 60px minmax(0, 1fr);
+    }
+
+    .user-card img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-card .button {
+        grid-column: 1 / -1;
     }
 
     .breadcrumbs {

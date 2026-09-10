@@ -1,4 +1,11 @@
-const Product = require('../models/Product');
+const { Op } = require('sequelize');
+const { sequelize, Product, Category, Brand, Color } = require('../../database/models');
+
+const productIncludes = [
+    { model: Category, as: 'categoryData', attributes: ['id', 'name'] },
+    { model: Brand, as: 'brandData', attributes: ['id', 'name'] },
+    { model: Color, as: 'colorData', attributes: ['id', 'name'], through: { attributes: [] } }
+];
 
 function renderProductNotFound(res) {
     return res.status(404).render('errors/404', {
@@ -11,105 +18,140 @@ function renderProductNotFound(res) {
 }
 
 function normalizeColors(colors = '') {
-    return colors
-        .split(',')
-        .map(color => color.trim())
-        .filter(Boolean);
+    return colors.split(',').map(color => color.trim()).filter(Boolean);
 }
 
-function buildProductData(body, image) {
+function presentProduct(instance) {
+    const product = instance.get({ plain: true });
     return {
-        name: body.name.trim(),
-        description: body.description.trim(),
-        image,
-        category: body.category,
-        colors: normalizeColors(body.colors),
-        price: Number(body.price),
-        brand: body.brand.trim(),
-        stock: Number(body.stock)
+        ...product,
+        price: Number(product.price),
+        category: product.categoryData?.name || '',
+        brand: product.brandData?.name || '',
+        colors: (product.colorData || []).map(color => color.name)
     };
 }
 
+async function findProduct(id) {
+    return Product.findByPk(id, { include: productIncludes });
+}
+
+async function formData() {
+    return { categories: await Category.findAll({ order: [['name', 'ASC']] }) };
+}
+
+async function saveColors(product, colorNames, transaction) {
+    const colors = [];
+    for (const name of colorNames) {
+        const [color] = await Color.findOrCreate({ where: { name }, transaction });
+        colors.push(color);
+    }
+    await product.setColorData(colors, { transaction });
+}
+
 const productController = {
-    list: (req, res) => {
+    list: async (req, res) => {
+        const q = (req.query.q || '').trim();
+        const where = q ? {
+            [Op.or]: [
+                { name: { [Op.like]: `%${q}%` } },
+                { description: { [Op.like]: `%${q}%` } },
+                { '$categoryData.name$': { [Op.like]: `%${q}%` } },
+                { '$brandData.name$': { [Op.like]: `%${q}%` } }
+            ]
+        } : {};
+        const rows = await Product.findAll({ where, include: productIncludes, order: [['name', 'ASC']] });
         res.render('products/list', {
             title: 'Productos | ConstruMarket',
-            products: Product.findAll()
+            products: rows.map(presentProduct),
+            q
         });
     },
 
-    create: (req, res) => {
-        res.render('products/create', {
-            title: 'Crear producto | ConstruMarket'
-        });
-    },
+    create: async (req, res) => res.render('products/create', {
+        title: 'Crear producto | ConstruMarket',
+        ...(await formData())
+    }),
 
-    store: (req, res) => {
-        const image = req.file ? req.file.filename : 'construmarket-logo.png';
-        Product.create(buildProductData(req.body, image));
-
-        return res.redirect('/products');
-    },
-
-    detail: (req, res) => {
-        const product = Product.findById(req.params.id);
-
-        if (!product) {
-            return renderProductNotFound(res);
+    store: async (req, res) => {
+        const transaction = await sequelize.transaction();
+        try {
+            const [brand] = await Brand.findOrCreate({ where: { name: req.body.brand.trim() }, transaction });
+            const product = await Product.create({
+                name: req.body.name.trim(),
+                description: (req.body.description || '').trim(),
+                image: req.file ? req.file.filename : 'construmarket-logo.png',
+                price: Number(req.body.price),
+                stock: Number(req.body.stock),
+                categoryId: Number(req.body.categoryId),
+                brandId: brand.id
+            }, { transaction });
+            await saveColors(product, normalizeColors(req.body.colors), transaction);
+            await transaction.commit();
+            return res.redirect('/products');
+        } catch (error) {
+            await transaction.rollback();
+            throw error;
         }
+    },
 
-        const relatedProducts = Product.findAll()
-            .filter(item => item.id !== product.id && item.category === product.category)
-            .slice(0, 4);
-
+    detail: async (req, res) => {
+        const row = await findProduct(req.params.id);
+        if (!row) return renderProductNotFound(res);
+        const product = presentProduct(row);
+        const relatedRows = await Product.findAll({
+            where: { id: { [Op.ne]: product.id }, categoryId: product.categoryId },
+            include: productIncludes,
+            limit: 4
+        });
         return res.render('products/detail', {
             title: `${product.name} | ConstruMarket`,
             product,
-            relatedProducts
+            relatedProducts: relatedRows.map(presentProduct)
         });
     },
 
-    edit: (req, res) => {
-        const product = Product.findById(req.params.id);
-
-        if (!product) {
-            return renderProductNotFound(res);
-        }
-
+    edit: async (req, res) => {
+        const row = await findProduct(req.params.id);
+        if (!row) return renderProductNotFound(res);
         return res.render('products/edit', {
             title: 'Editar producto | ConstruMarket',
-            product
+            product: presentProduct(row),
+            ...(await formData())
         });
     },
 
-    update: (req, res) => {
-        const currentProduct = Product.findById(req.params.id);
-
-        if (!currentProduct) {
-            return renderProductNotFound(res);
+    update: async (req, res) => {
+        const product = await Product.findByPk(req.params.id);
+        if (!product) return renderProductNotFound(res);
+        const transaction = await sequelize.transaction();
+        try {
+            const [brand] = await Brand.findOrCreate({ where: { name: req.body.brand.trim() }, transaction });
+            await product.update({
+                name: req.body.name.trim(),
+                description: (req.body.description || '').trim(),
+                image: req.file ? req.file.filename : product.image,
+                price: Number(req.body.price),
+                stock: Number(req.body.stock),
+                categoryId: Number(req.body.categoryId),
+                brandId: brand.id
+            }, { transaction });
+            await saveColors(product, normalizeColors(req.body.colors), transaction);
+            await transaction.commit();
+            return res.redirect(`/products/${product.id}`);
+        } catch (error) {
+            await transaction.rollback();
+            throw error;
         }
-
-        const image = req.file ? req.file.filename : currentProduct.image;
-        Product.update(req.params.id, buildProductData(req.body, image));
-
-        return res.redirect(`/products/${req.params.id}`);
     },
 
-    destroy: (req, res) => {
-        const wasDeleted = Product.delete(req.params.id);
-
-        if (!wasDeleted) {
-            return renderProductNotFound(res);
-        }
-
+    destroy: async (req, res) => {
+        const deleted = await Product.destroy({ where: { id: req.params.id } });
+        if (!deleted) return renderProductNotFound(res);
         return res.redirect('/products');
     },
 
-    cart: (req, res) => {
-        res.render('products/cart', {
-            title: 'Tu carrito | ConstruMarket'
-        });
-    }
+    cart: (req, res) => res.render('products/cart', { title: 'Tu carrito | ConstruMarket' })
 };
 
 module.exports = productController;

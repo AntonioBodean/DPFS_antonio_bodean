@@ -3,3 +3,6 @@
 node_modules/
 .npm-cache/
 sprint-*.md
+!sprint-6.md
+public/images/users/*
+!public/images/users/.gitkeep

@@ -51,28 +51,12 @@
 
                                 <div class="form-field">
                                     <label for="product-category">Categoría</label>
-                                    <select id="product-category" name="category" required>
-                                        <option value="Materiales" <%=product.category==='Materiales' ? 'selected' : ''
-                                            %>
-                                            >
-                                            Materiales
-                                        </option>
-
-                                        <option value="Herramientas" <%=product.category==='Herramientas' ? 'selected'
-                                            : '' %>
-                                            >
-                                            Herramientas
-                                        </option>
-
-                                        <option value="Pinturas" <%=product.category==='Pinturas' ? 'selected' : '' %>
-                                            >
-                                            Pinturas
-                                        </option>
-
-                                        <option value="Hierros" <%=product.category==='Hierros' ? 'selected' : '' %>
-                                            >
-                                            Hierros
-                                        </option>
+                                    <select id="product-category" name="categoryId" required>
+                                        <% categories.forEach(category => { %>
+                                            <option value="<%= category.id %>" <%= product.categoryId === category.id ? 'selected' : '' %>>
+                                                <%= category.name %>
+                                            </option>
+                                        <% }) %>
                                     </select>
                                 </div>
 

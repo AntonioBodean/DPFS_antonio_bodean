@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+    <%- include('../partials/header.ejs') %>
+    <main id="contenido-principal">
+        <section class="section section--soft">
+            <div class="container">
+                <header class="section-heading">
+                    <div><p class="eyebrow">Administración</p><h1>Usuarios</h1></div>
+                    <a class="button button--primary" href="/users/create">Nuevo usuario</a>
+                </header>
+                <form class="catalog-search" action="/users" method="get" role="search">
+                    <label class="sr-only" for="users-q">Buscar usuarios</label>
+                    <input id="users-q" name="q" type="search" value="<%= q %>" placeholder="Buscar por nombre o correo">
+                    <button class="button button--primary" type="submit">Buscar</button>
+                    <% if (q) { %><a class="button button--secondary" href="/users">Limpiar</a><% } %>
+                </form>
+                <div class="users-grid">
+                    <% users.forEach(user => { %>
+                        <article class="user-card">
+                            <img src="<%= user.image %>" alt="Avatar de <%= user.firstName %>">
+                            <div><p class="eyebrow"><%= user.category === 'Admin' ? 'Administrador' : 'Cliente' %></p>
+                                <h2><%= user.firstName %> <%= user.lastName %></h2><p><%= user.email %></p></div>
+                            <a class="button button--secondary" href="/users/<%= user.id %>">Ver detalle</a>
+                        </article>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

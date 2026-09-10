@@ -24,6 +24,18 @@
                                 </a>
                             </header>
 
+                            <form class="catalog-search" action="/products" method="get" role="search">
+                                <label class="sr-only" for="catalog-q">Buscar productos</label>
+                                <input id="catalog-q" type="search" name="q" value="<%= q %>"
+                                    placeholder="Buscar por producto, categoría o marca">
+                                <button class="button button--primary" type="submit">Buscar</button>
+                                <% if (q) { %><a class="button button--secondary" href="/products">Limpiar</a><% } %>
+                            </form>
+
+                            <% if (!products.length) { %>
+                                <p class="empty-state">No encontramos productos para “<%= q %>”.</p>
+                            <% } %>
+
                             <div class="products-grid">
                                 <% products.forEach(product=> { %>
                                     <article class="product-card">

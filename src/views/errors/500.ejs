@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main class="error-page"><div class="container error-page__content">
+        <p class="error-page__code">500</p><h1>No pudimos completar la operación</h1><p class="error-page__message"><%= message %></p>
+        <a class="button button--primary" href="/">Volver al inicio</a>
+    </div></main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

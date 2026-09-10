@@ -11,12 +11,12 @@
                 <section class="auth-section" aria-labelledby="register-title">
                     <div class="container auth-section__content">
                         <header class="auth-heading">
-                            <p class="eyebrow">Sumate a ConstruMarket</p>
-                            <h1 id="register-title">Crear cuenta</h1>
-                            <p>Completá tus datos para empezar a comprar todo para tu obra.</p>
+                            <p class="eyebrow"><%= isAdminCreate ? 'Administración' : 'Sumate a ConstruMarket' %></p>
+                            <h1 id="register-title"><%= isAdminCreate ? 'Crear usuario' : 'Crear cuenta' %></h1>
+                            <p><%= isAdminCreate ? 'Completá los datos de la nueva cuenta.' : 'Completá tus datos para empezar a comprar todo para tu obra.' %></p>
                         </header>
 
-                        <form class="auth-card" action="/users/register" method="post" enctype="multipart/form-data">
+                        <form class="auth-card" action="<%= isAdminCreate ? '/users' : '/users/register' %>" method="post" enctype="multipart/form-data">
                             <div class="form-field">
                                 <label for="first-name">Nombre</label>
                                 <input required id="first-name" class="<%= errors.firstName ? 'form-field__error' : '' %>"
@@ -43,6 +43,18 @@
                                 <input id="phone" type="tel" name="phone" autocomplete="tel" inputmode="tel"
                                     placeholder="Ej.: 11 2345 6789" value="<%= oldData.phone || '' %>">
                             </div>
+                            <% if (isAdminCreate) { %>
+                                <div class="form-field">
+                                    <label for="role">Tipo de cuenta</label>
+                                    <select id="role" name="roleId" class="<%= errors.roleId ? 'form-field__error' : '' %>" required>
+                                        <option value="">Seleccionar</option>
+                                        <% roles.forEach(role => { %>
+                                            <option value="<%= role.id %>" <%= Number(oldData.roleId) === role.id ? 'selected' : '' %>><%= role.name %></option>
+                                        <% }) %>
+                                    </select>
+                                    <% if (errors.roleId) { %><small class="form-field__error"><%= errors.roleId %></small><% } %>
+                                </div>
+                            <% } %>
                             <div class="form-field">
                                 <label for="profile-image">Imagen de perfil</label>
                                 <input required id="profile-image" class="<%= errors.image ? 'form-field__error' : '' %>"
@@ -61,16 +73,22 @@
                                     type="password" name="confirmPassword" autocomplete="new-password" required>
                                 <% if (errors.confirmPassword) { %><small class="form-field__error"><%= errors.confirmPassword %></small><% } %>
                             </div>
-                            <label class="checkbox-field">
-                                <input type="checkbox" name="terms" <%= oldData.terms ? 'checked' : '' %> required>
-                                <span>Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de
-                                        privacidad</a>.</span>
-                            </label>
-                            <% if (errors.terms) { %><p class="field-message form-field__error"><%= errors.terms %></p><% } %>
-                            <button class="button button--primary auth-submit" type="submit">Crear cuenta</button>
+                            <% if (!isAdminCreate) { %>
+                                <label class="checkbox-field">
+                                    <input type="checkbox" name="terms" <%= oldData.terms ? 'checked' : '' %> required>
+                                    <span>Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de
+                                            privacidad</a>.</span>
+                                </label>
+                                <% if (errors.terms) { %><p class="field-message form-field__error"><%= errors.terms %></p><% } %>
+                            <% } %>
+                            <button class="button button--primary auth-submit" type="submit"><%= isAdminCreate ? 'Crear usuario' : 'Crear cuenta' %></button>
                             <div class="auth-switch">
-                                <p>¿Ya tenés cuenta?</p>
-                                <a href="/users/login">Iniciar sesión</a>
+                                <% if (isAdminCreate) { %>
+                                    <a href="/users">Cancelar y volver a usuarios</a>
+                                <% } else { %>
+                                    <p>¿Ya tenés cuenta?</p>
+                                    <a href="/users/login">Iniciar sesión</a>
+                                <% } %>
                             </div>
                         </form>
                     </div>

@@ -27,6 +27,10 @@ app.use(session({
         sameSite: 'lax'
     }
 }));
+app.use((req, res, next) => {
+    res.locals.loggedUser = null;
+    next();
+});
 app.use(rememberUserMiddleware);
 
 app.use('/', mainRoutes);
@@ -40,6 +44,18 @@ app.use((req, res) => {
         message: 'La dirección que ingresaste no existe o cambió de ubicación.',
         backUrl: '/',
         backLabel: 'Volver al inicio'
+    });
+});
+
+app.use((error, req, res, next) => {
+    console.error(error);
+    if (res.headersSent) return next(error);
+    const databaseUnavailable = ['ECONNREFUSED', 'ER_BAD_DB_ERROR', 'ER_ACCESS_DENIED_ERROR'].includes(error.original?.code || error.code);
+    return res.status(500).render('errors/500', {
+        title: 'Error del servidor | ConstruMarket',
+        message: databaseUnavailable
+            ? 'No pudimos conectarnos a la base de datos. Revisá la configuración del archivo .env y ejecutá database/structure.sql y database/data.sql.'
+            : 'Ocurrió un error inesperado. Intentá nuevamente en unos minutos.'
     });
 });
 

@@ -70,7 +70,7 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades implementadas
 
-Durante los primeros cinco sprints se implementaron:
+Durante los primeros seis sprints se implementaron:
 
 - Página de inicio responsive.
 - Listado y página de detalle generados desde datos JSON.
@@ -79,7 +79,9 @@ Durante los primeros cinco sprints se implementaron:
 - Creación, edición y eliminación persistente de productos.
 - Carga de imágenes para productos mediante Multer.
 - Simulación de los métodos PUT y DELETE mediante Method Override.
-- Archivos JSON iniciales para productos y usuarios.
+- Persistencia relacional MySQL mediante Sequelize.
+- Modelos asociados para usuarios, roles, productos, categorías, marcas y colores.
+- Búsqueda de productos y administración de usuarios.
 - Rutas y controladores separados por dominio.
 - Componentes reutilizables mediante parciales de EJS.
 - Archivos CSS e imágenes servidos desde la carpeta `public`.
@@ -87,7 +89,7 @@ Durante los primeros cinco sprints se implementaron:
 - Login, perfil, logout, sesiones y opción «Recordarme».
 - Middlewares para rutas exclusivas de huéspedes y usuarios autenticados.
 
-Los formularios de productos guardan sus cambios en `src/data/products.json`. Esta persistencia con archivos es temporal y será reemplazada por una base de datos relacional en un sprint posterior.
+Los JSON de `src/data` se conservan únicamente como referencia histórica. La aplicación consulta y modifica la base de datos MySQL mediante Sequelize.
 
 ---
 
@@ -122,6 +124,13 @@ Los formularios de productos guardan sus cambios en `src/data/products.json`. Es
 - Cookie Parser
 - Middlewares de aplicación y de ruta
 
+### Sprint 6
+
+- MySQL
+- Sequelize y sequelize-cli
+- Modelo relacional normalizado
+- Scripts SQL de estructura y datos
+
 ### Herramientas
 
 - Git
@@ -140,18 +149,21 @@ ConstruMarket/
 │   │   ├── style.css
 │   │   └── responsive.css
 │   └── images/
+├── database/
+│   ├── config/
+│   ├── migrations/
+│   ├── models/
+│   ├── seeders/
+│   ├── structure.sql
+│   └── data.sql
+├── drawio/pdf/construmarket-der.pdf
 ├── src/
 │   ├── app.js
 │   ├── controllers/
 │   │   ├── mainController.js
 │   │   ├── productController.js
 │   │   └── userController.js
-│   ├── data/
-│   │   ├── products.json
-│   │   └── users.json
-│   ├── models/
-│   │   ├── Product.js
-│   │   └── User.js
+│   ├── data/ (referencia histórica)
 │   ├── middlewares/
 │   │   ├── authMiddleware.js
 │   │   ├── guestMiddleware.js
@@ -204,13 +216,21 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 | GET | `/products/:id/edit` | Formulario de edición |
 | PUT | `/products/:id` | Actualización de un producto |
 | DELETE | `/products/:id` | Eliminación de un producto |
+| GET | `/products?q=texto` | Búsqueda de productos |
 | GET | `/products/cart` | Carrito de compras |
 | GET | `/users/login` | Inicio de sesión |
 | GET | `/users/register` | Registro de usuario |
-| POST | `/users/register` | Creación de usuario |
+| POST | `/users/register` | Creación de la cuenta del visitante |
 | POST | `/users/login` | Autenticación de usuario |
 | GET | `/users/profile` | Perfil (requiere login) |
 | POST | `/users/logout` | Cierre de sesión |
+| GET | `/users` | Listado y búsqueda de usuarios |
+| GET | `/users/create` | Formulario administrativo de creación |
+| POST | `/users` | Creación administrativa sin cambiar la sesión activa |
+| GET | `/users/:id` | Detalle de usuario |
+| GET | `/users/:id/edit` | Edición de usuario |
+| PUT | `/users/:id` | Actualización de usuario |
+| DELETE | `/users/:id` | Eliminación de usuario |
 
 ---
 
@@ -218,8 +238,8 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 
 ### Requisitos
 
-- Node.js
-- npm
+- Node.js y npm
+- MySQL 8 o compatible
 
 ### Pasos
 
@@ -231,13 +251,24 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 npm install
 ```
 
-4. Iniciar la aplicación:
+4. Copiar `.env.example` como `.env` y completar las credenciales de MySQL.
+
+5. Crear la estructura y cargar los datos de ejemplo:
+
+```bash
+mysql -u root -p < database/structure.sql
+mysql -u root -p construmarket < database/data.sql
+```
+
+El primer script selecciona la base `construmarket`; el segundo también lo hace, por lo que puede ejecutarse sin indicar el nombre en la línea de comandos.
+
+6. Iniciar la aplicación:
 
 ```bash
 npm start
 ```
 
-5. Abrir en el navegador:
+7. Abrir en el navegador:
 
 ```text
 http://localhost:3000
@@ -290,16 +321,22 @@ El seguimiento del Sprint 4 se encuentra en el [tablero de GitHub Projects](http
 
 El seguimiento del Sprint 5 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/4)
 
+### Sprint 6
+
+El seguimiento del Sprint 6 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/5)
+
 ---
 
 ## Estado del proyecto
 
-Sprint 1 entregado.
+Sprint 1 implementado.
 
-Sprint 2 entregado.
+Sprint 2 implementado.
 
-Sprint 3 entregado.
+Sprint 3 implementado.
 
 Sprint 4 implementado: productos y usuarios definidos en JSON, contenido dinámico y administración completa de productos con listado, detalle, creación, edición y eliminación.
 
 Sprint 5 implementado: registro, login, perfil, logout, sesiones, cookie «Recordarme» y protección de rutas por estado de autenticación.
+
+Sprint 6 implementado: DER, scripts SQL, configuración y modelos Sequelize con relaciones, CRUD y búsqueda de productos, y administración de usuarios sobre MySQL.

@@ -5,7 +5,6 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const app = require('../src/app');
-const User = require('../src/models/User');
 
 const usersFilePath = path.join(__dirname, '../src/data/users.json');
 const usersImagesPath = path.join(__dirname, '../public/images/users');
@@ -21,7 +20,7 @@ function namedCookie(response, name) {
     return cookie ? cookie.split(';')[0] : '';
 }
 
-test('el flujo de usuarios registra, autentica, recuerda y protege rutas', async () => {
+test('el flujo JSON del Sprint 5 (reemplazado por Sequelize en Sprint 6)', { skip: 'Prueba histórica: depende de la persistencia JSON eliminada en Sprint 6.' }, async () => {
     const originalUsers = fs.readFileSync(usersFilePath, 'utf-8');
     const originalImages = new Set(fs.readdirSync(usersImagesPath));
     const server = app.listen(0);

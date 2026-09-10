@@ -38,5 +38,12 @@ router.get('/register', guestMiddleware, userController.register);
 router.post('/register', guestMiddleware, upload.single('image'), userController.processRegister);
 router.get('/profile', authMiddleware, userController.profile);
 router.post('/logout', authMiddleware, userController.logout);
+router.get('/create', authMiddleware, userController.create);
+router.post('/', authMiddleware, upload.single('image'), userController.store);
+router.get('/', authMiddleware, userController.list);
+router.get('/:id/edit', authMiddleware, userController.edit);
+router.get('/:id', authMiddleware, userController.detail);
+router.put('/:id', authMiddleware, upload.single('image'), userController.update);
+router.delete('/:id', authMiddleware, userController.destroy);
 
 module.exports = router;

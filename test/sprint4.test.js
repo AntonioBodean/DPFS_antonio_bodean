@@ -4,11 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const app = require('../src/app');
-const Product = require('../src/models/Product');
 
 const productsFilePath = path.join(__dirname, '../src/data/products.json');
 
-test('el CRUD de productos crea, lee, edita y elimina', async () => {
+test('el CRUD JSON del Sprint 4 (reemplazado por Sequelize en Sprint 6)', { skip: 'Prueba histórica: modifica archivos JSON que ya no son la fuente de datos.' }, async () => {
     const originalProducts = fs.readFileSync(productsFilePath, 'utf-8');
     const server = app.listen(0);
     const address = server.address();
