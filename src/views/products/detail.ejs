@@ -58,11 +58,13 @@
                                 </div>
                             </form>
 
-                            <div class="product-card__actions">
-                                <a class="button button--secondary" href="/products/<%= product.id %>/edit">
-                                    Editar producto
-                                </a>
-                            </div>
+                            <% if (loggedUser?.category === 'Admin') { %>
+                                <div class="product-card__actions">
+                                    <a class="button button--secondary" href="/products/<%= product.id %>/edit">
+                                        Editar producto
+                                    </a>
+                                </div>
+                            <% } %>
                         </div>
                     </section>
 

@@ -54,8 +54,8 @@ test('el alta administrativa de usuarios no reutiliza el registro de visitantes'
     const listView = fs.readFileSync(path.join(root, 'src/views/users/list.ejs'), 'utf8');
     const registerView = fs.readFileSync(path.join(root, 'src/views/users/register.ejs'), 'utf8');
 
-    assert.match(routes, /router\.get\('\/create', authMiddleware, userController\.create\)/);
-    assert.match(routes, /router\.post\('\/', authMiddleware, upload\.single\('image'\), userController\.store\)/);
+    assert.match(routes, /router\.get\('\/create', (?:auth|admin)Middleware, userController\.create\)/);
+    assert.match(routes, /router\.post\('\/', (?:auth|admin)Middleware, upload\.single\('image'\), (?:adminCreateValidations, )?userController\.store\)/);
     assert.match(listView, /href="\/users\/create"/);
     assert.match(registerView, /isAdminCreate \? '\/users' : '\/users\/register'/);
 

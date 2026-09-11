@@ -19,9 +19,11 @@
                                     <p class="eyebrow">Nuestro catálogo</p>
                                     <h1 id="products-title">Todos los productos</h1>
                                 </div>
-                                <a class="button button--primary" href="/products/create">
-                                    Nuevo producto
-                                </a>
+                                <% if (loggedUser?.category === 'Admin') { %>
+                                    <a class="button button--primary" href="/products/create">
+                                        Nuevo producto
+                                    </a>
+                                <% } %>
                             </header>
 
                             <form class="catalog-search" action="/products" method="get" role="search">
@@ -68,10 +70,12 @@
                                                     Ver producto
                                                 </a>
 
-                                                <a class="button button--primary"
-                                                    href="/products/<%= product.id %>/edit">
-                                                    Editar
-                                                </a>
+                                                <% if (loggedUser?.category === 'Admin') { %>
+                                                    <a class="button button--primary"
+                                                        href="/products/<%= product.id %>/edit">
+                                                        Editar
+                                                    </a>
+                                                <% } %>
                                             </div>
                                         </div>
                                     </article>

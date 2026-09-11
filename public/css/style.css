@@ -1405,7 +1405,9 @@ h3 {
     font-size: 0.78rem;
 }
 
-.form-field input.form-field__error {
+.form-field input.form-field__error,
+.form-field textarea.form-field__error,
+.form-field select.form-field__error {
     border-color: var(--color-error) !important;
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.14) !important;
     outline: 0 !important;

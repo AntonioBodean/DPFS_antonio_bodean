@@ -21,58 +21,65 @@
                             </header>
 
                             <form class="auth-card product-form" action="/products" method="post"
-                                enctype="multipart/form-data">
+                                enctype="multipart/form-data" data-validation="product" data-image-required="true" novalidate>
                                 <div class="form-field">
                                     <label for="product-name">Nombre del producto</label>
-                                    <input id="product-name" type="text" name="name"
-                                        placeholder="Ej.: Cemento Portland 25 kg" required>
+                                    <input id="product-name" class="<%= errors.name ? 'form-field__error' : '' %>" type="text" name="name"
+                                        placeholder="Ej.: Cemento Portland 25 kg" value="<%= oldData.name || '' %>" required>
+                                    <% if (errors.name) { %><small class="form-field__error"><%= errors.name %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-description">Descripción</label>
-                                    <textarea id="product-description" style="width: 100%;" name="description" rows="5"
-                                        placeholder="Describí las características del producto"></textarea>
+                                    <textarea id="product-description" class="<%= errors.description ? 'form-field__error' : '' %>" style="width: 100%;" name="description" rows="5"
+                                        placeholder="Describí las características del producto"><%= oldData.description || '' %></textarea>
+                                    <% if (errors.description) { %><small class="form-field__error"><%= errors.description %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-image">Imagen</label>
-                                    <input id="product-image" type="file" name="image" accept="image/*" required>
+                                    <input id="product-image" class="<%= errors.image ? 'form-field__error' : '' %>" type="file" name="image" accept=".jpg,.jpeg,.png,.gif" required>
+                                    <% if (errors.image) { %><small class="form-field__error"><%= errors.image %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-category">Categoría</label>
-                                    <select id="product-category" name="categoryId" required>
+                                    <select id="product-category" class="<%= errors.categoryId ? 'form-field__error' : '' %>" name="categoryId" required>
                                         <option value="">Seleccioná una categoría</option>
                                         <% categories.forEach(category => { %>
-                                            <option value="<%= category.id %>"><%= category.name %></option>
+                                            <option value="<%= category.id %>" <%= Number(oldData.categoryId) === category.id ? 'selected' : '' %>><%= category.name %></option>
                                         <% }) %>
                                     </select>
+                                    <% if (errors.categoryId) { %><small class="form-field__error"><%= errors.categoryId %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-brand">Marca</label>
-                                    <input id="product-brand" type="text" name="brand" placeholder="Ej.: Loma Negra"
-                                        required>
+                                    <input id="product-brand" class="<%= errors.brand ? 'form-field__error' : '' %>" type="text" name="brand" placeholder="Ej.: Loma Negra"
+                                        value="<%= oldData.brand || '' %>" required>
+                                    <% if (errors.brand) { %><small class="form-field__error"><%= errors.brand %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-colors">
                                         Colores <span>(opcional)</span>
                                     </label>
-                                    <input id="product-colors" type="text" name="colors"
+                                    <input id="product-colors" type="text" name="colors" value="<%= oldData.colors || '' %>"
                                         placeholder="Ej.: rojo, azul, gris">
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-price">Precio</label>
-                                    <input id="product-price" type="number" name="price" min="0" step="0.01"
-                                        placeholder="0.00" required>
+                                    <input id="product-price" class="<%= errors.price ? 'form-field__error' : '' %>" type="number" name="price" min="0" step="0.01"
+                                        placeholder="0.00" value="<%= oldData.price || '' %>" required>
+                                    <% if (errors.price) { %><small class="form-field__error"><%= errors.price %></small><% } %>
                                 </div>
 
                                 <div class="form-field">
                                     <label for="product-stock">Stock disponible</label>
-                                    <input id="product-stock" type="number" name="stock" min="0" step="1" value="0"
+                                    <input id="product-stock" class="<%= errors.stock ? 'form-field__error' : '' %>" type="number" name="stock" min="0" step="1" value="<%= oldData.stock ?? 0 %>"
                                         required>
+                                    <% if (errors.stock) { %><small class="form-field__error"><%= errors.stock %></small><% } %>
                                 </div>
 
                                 <button class="button button--primary auth-submit" type="submit">
@@ -90,6 +97,7 @@
                 </main>
 
                 <%- include('../partials/footer.ejs') %>
+                <script src="/js/form-validation.js" defer></script>
         </div>
     </body>
 

@@ -70,7 +70,7 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades implementadas
 
-Durante los primeros seis sprints se implementaron:
+Durante los primeros siete sprints se implementaron:
 
 - Página de inicio responsive.
 - Listado y página de detalle generados desde datos JSON.
@@ -88,6 +88,10 @@ Durante los primeros seis sprints se implementaron:
 - Registro con avatar y contraseñas cifradas mediante bcryptjs.
 - Login, perfil, logout, sesiones y opción «Recordarme».
 - Middlewares para rutas exclusivas de huéspedes y usuarios autenticados.
+- Validaciones de back-end con Express Validator para registro, login y productos.
+- Validaciones de front-end con feedback inmediato y mensajes por campo.
+- Acciones y rutas de administración de productos restringidas al rol `Admin`.
+- Listado y CRUD administrativo de usuarios restringidos al rol `Admin`.
 
 Los JSON de `src/data` se conservan únicamente como referencia histórica. La aplicación consulta y modifica la base de datos MySQL mediante Sequelize.
 
@@ -130,6 +134,12 @@ Los JSON de `src/data` se conservan únicamente como referencia histórica. La a
 - Sequelize y sequelize-cli
 - Modelo relacional normalizado
 - Scripts SQL de estructura y datos
+
+### Sprint 7
+
+- Express Validator
+- Validaciones custom con JavaScript
+- Feedback accesible por campo y conservación de datos inválidos
 
 ### Herramientas
 
@@ -325,6 +335,10 @@ El seguimiento del Sprint 5 se encuentra en el [tablero de GitHub Projects](http
 
 El seguimiento del Sprint 6 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/5)
 
+### Sprint 7
+
+El seguimiento del Sprint 7 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/6)
+
 ---
 
 ## Estado del proyecto
@@ -340,3 +354,5 @@ Sprint 4 implementado: productos y usuarios definidos en JSON, contenido dinámi
 Sprint 5 implementado: registro, login, perfil, logout, sesiones, cookie «Recordarme» y protección de rutas por estado de autenticación.
 
 Sprint 6 implementado: DER, scripts SQL, configuración y modelos Sequelize con relaciones, CRUD y búsqueda de productos, y administración de usuarios sobre MySQL.
+
+Sprint 7 implementado: validaciones de back-end con Express Validator y validaciones inmediatas de front-end para registro, login y formularios de productos.

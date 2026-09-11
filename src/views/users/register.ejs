@@ -16,7 +16,7 @@
                             <p><%= isAdminCreate ? 'Completá los datos de la nueva cuenta.' : 'Completá tus datos para empezar a comprar todo para tu obra.' %></p>
                         </header>
 
-                        <form class="auth-card" action="<%= isAdminCreate ? '/users' : '/users/register' %>" method="post" enctype="multipart/form-data">
+                        <form class="auth-card" action="<%= isAdminCreate ? '/users' : '/users/register' %>" method="post" enctype="multipart/form-data" data-validation="register" novalidate>
                             <div class="form-field">
                                 <label for="first-name">Nombre</label>
                                 <input required id="first-name" class="<%= errors.firstName ? 'form-field__error' : '' %>"
@@ -58,12 +58,12 @@
                             <div class="form-field">
                                 <label for="profile-image">Imagen de perfil</label>
                                 <input required id="profile-image" class="<%= errors.image ? 'form-field__error' : '' %>"
-                                    type="file" name="image" accept="image/*">
+                                    type="file" name="image" accept=".jpg,.jpeg,.png,.gif">
                                 <% if (errors.image) { %><small class="form-field__error"><%= errors.image %></small><% } %>
                             </div>
                             <div class="form-field">
                                 <label for="register-password">Contraseña</label>
-                                <input id="register-password" type="password" name="password"
+                                <input id="register-password" class="<%= errors.password ? 'form-field__error' : '' %>" type="password" name="password"
                                     autocomplete="new-password" aria-describedby="password-help" required>
                                 <small id="password-help" class="<%= errors.password ? 'form-field__error' : '' %>"><%= errors.password || 'Usá al menos 8 caracteres.' %></small>
                             </div>
@@ -98,6 +98,7 @@
             </main>
 
             <%- include('../partials/footer.ejs') %>
+            <script src="/js/form-validation.js" defer></script>
     </body>
 
 </html>

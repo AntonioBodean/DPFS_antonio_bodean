@@ -4,6 +4,8 @@ const path = require('path');
 const router = express.Router();
 
 const productController = require('../controllers/productController');
+const adminMiddleware = require('../middlewares/adminMiddleware');
+const { productCreateValidations, productUpdateValidations } = require('../middlewares/validations/productValidations');
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -18,18 +20,16 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage,
     limits: { fileSize: 5 * 1024 * 1024 },
-    fileFilter: (req, file, callback) => {
-        callback(null, file.mimetype.startsWith('image/'));
-    }
+    fileFilter: (req, file, callback) => callback(null, true)
 });
 
 router.get('/', productController.list);
-router.get('/create', productController.create);
+router.get('/create', adminMiddleware, productController.create);
 router.get('/cart', productController.cart);
-router.post('/', upload.single('image'), productController.store);
-router.get('/:id/edit', productController.edit);
+router.post('/', adminMiddleware, upload.single('image'), productCreateValidations, productController.store);
+router.get('/:id/edit', adminMiddleware, productController.edit);
 router.get('/:id', productController.detail);
-router.put('/:id', upload.single('image'), productController.update);
-router.delete('/:id', productController.destroy);
+router.put('/:id', adminMiddleware, upload.single('image'), productUpdateValidations, productController.update);
+router.delete('/:id', adminMiddleware, productController.destroy);
 
 module.exports = router;

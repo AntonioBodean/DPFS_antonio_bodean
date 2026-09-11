@@ -1,4 +1,6 @@
 const { Op } = require('sequelize');
+const fs = require('fs');
+const { validationResult } = require('express-validator');
 const { sequelize, Product, Category, Brand, Color } = require('../../database/models');
 
 const productIncludes = [
@@ -40,6 +42,15 @@ async function formData() {
     return { categories: await Category.findAll({ order: [['name', 'ASC']] }) };
 }
 
+function getErrors(req) {
+    const mapped = validationResult(req).mapped();
+    return Object.fromEntries(Object.entries(mapped).map(([field, error]) => [field, error.msg]));
+}
+
+function removeUploadedFile(file) {
+    if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+}
+
 async function saveColors(product, colorNames, transaction) {
     const colors = [];
     for (const name of colorNames) {
@@ -70,10 +81,22 @@ const productController = {
 
     create: async (req, res) => res.render('products/create', {
         title: 'Crear producto | ConstruMarket',
+        errors: {},
+        oldData: {},
         ...(await formData())
     }),
 
     store: async (req, res) => {
+        const errors = getErrors(req);
+        if (Object.keys(errors).length) {
+            removeUploadedFile(req.file);
+            return res.status(422).render('products/create', {
+                title: 'Crear producto | ConstruMarket',
+                errors,
+                oldData: req.body,
+                ...(await formData())
+            });
+        }
         const transaction = await sequelize.transaction();
         try {
             const [brand] = await Brand.findOrCreate({ where: { name: req.body.brand.trim() }, transaction });
@@ -117,13 +140,31 @@ const productController = {
         return res.render('products/edit', {
             title: 'Editar producto | ConstruMarket',
             product: presentProduct(row),
+            errors: {},
             ...(await formData())
         });
     },
 
     update: async (req, res) => {
-        const product = await Product.findByPk(req.params.id);
-        if (!product) return renderProductNotFound(res);
+        const row = await findProduct(req.params.id);
+        if (!row) return renderProductNotFound(res);
+        const currentProduct = presentProduct(row);
+        const errors = getErrors(req);
+        if (Object.keys(errors).length) {
+            removeUploadedFile(req.file);
+            return res.status(422).render('products/edit', {
+                title: 'Editar producto | ConstruMarket',
+                errors,
+                product: {
+                    ...currentProduct,
+                    ...req.body,
+                    categoryId: Number(req.body.categoryId),
+                    colors: normalizeColors(req.body.colors)
+                },
+                ...(await formData())
+            });
+        }
+        const product = row;
         const transaction = await sequelize.transaction();
         try {
             const [brand] = await Brand.findOrCreate({ where: { name: req.body.brand.trim() }, transaction });

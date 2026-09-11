@@ -1,27 +1,16 @@
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
+const { validationResult } = require('express-validator');
 const { Op } = require('sequelize');
 const { User, UserRole } = require('../../database/models');
 
-async function registerErrors(body, currentUserId = null, requireTerms = true) {
-    const errors = {};
-    const firstName = (body.firstName || '').trim();
-    const lastName = (body.lastName || '').trim();
-    const email = (body.email || '').trim().toLowerCase();
-    const password = body.password || '';
-    const duplicate = await User.findOne({
-        where: { email, ...(currentUserId ? { id: { [Op.ne]: currentUserId } } : {}) }
-    });
+function getErrors(req) {
+    const mapped = validationResult(req).mapped();
+    return Object.fromEntries(Object.entries(mapped).map(([field, error]) => [field, error.msg]));
+}
 
-    if (firstName.length < 2) errors.firstName = 'El nombre debe contener al menos 2 caracteres.';
-    if (lastName.length < 2) errors.lastName = 'El apellido debe contener al menos 2 caracteres.';
-    if (!/^\S+@\S+\.\S+$/.test(email)) errors.email = 'Ingresá un correo electrónico válido.';
-    if (duplicate) errors.email = 'Ya existe una cuenta con ese correo electrónico.';
-    if (!currentUserId && password.length < 8) errors.password = 'La contraseña debe contener al menos 8 caracteres.';
-    if (password && password.length < 8) errors.password = 'La contraseña debe contener al menos 8 caracteres.';
-    if (password !== (body.confirmPassword || '')) errors.confirmPassword = 'Las contraseñas no coinciden.';
-    if (requireTerms && !body.terms) errors.terms = 'Debés aceptar los términos y condiciones.';
-    return errors;
+function removeUploadedFile(file) {
+    if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
 }
 
 function presentUser(instance) {
@@ -51,15 +40,15 @@ const userController = {
 
     processLogin: async (req, res) => {
         const email = (req.body.email || '').trim().toLowerCase();
-        const user = await User.findOne({ where: { email } });
-        const validPassword = user && bcrypt.compareSync(req.body.password || '', user.password);
-        if (!validPassword) {
-            return res.status(401).render('users/login', {
+        const errors = getErrors(req);
+        if (Object.keys(errors).length) {
+            return res.status(422).render('users/login', {
                 title: 'Iniciar sesión | ConstruMarket',
-                errors: { credentials: 'El correo electrónico o la contraseña son incorrectos.' },
+                errors,
                 oldData: { email }
             });
         }
+        const user = await User.findOne({ where: { email } });
         req.session.userId = user.id;
         if (req.body.remember) {
             res.cookie('rememberUser', user.email, {
@@ -75,10 +64,9 @@ const userController = {
     }),
 
     processRegister: async (req, res) => {
-        const errors = await registerErrors(req.body);
-        if (!req.file) errors.image = 'Seleccioná una imagen de perfil.';
+        const errors = getErrors(req);
         if (Object.keys(errors).length) {
-            if (req.file) fs.unlinkSync(req.file.path);
+            removeUploadedFile(req.file);
             return res.status(422).render('users/register', {
                 title: 'Crear cuenta | ConstruMarket', errors, oldData: req.body,
                 isAdminCreate: false, roles: []
@@ -108,14 +96,12 @@ const userController = {
 
     store: async (req, res) => {
         const roles = await UserRole.findAll({ order: [['name', 'ASC']] });
-        const errors = await registerErrors(req.body, null, false);
+        const errors = getErrors(req);
         const roleId = Number(req.body.roleId);
 
         if (!roles.some(role => role.id === roleId)) errors.roleId = 'Seleccioná un tipo de cuenta válido.';
-        if (!req.file) errors.image = 'Seleccioná una imagen de perfil.';
-
         if (Object.keys(errors).length) {
-            if (req.file) fs.unlinkSync(req.file.path);
+            removeUploadedFile(req.file);
             return res.status(422).render('users/register', {
                 title: 'Crear usuario | ConstruMarket', errors, oldData: req.body,
                 isAdminCreate: true, roles
@@ -172,9 +158,12 @@ const userController = {
     update: async (req, res) => {
         const user = await User.findByPk(req.params.id);
         if (!user) return renderUserNotFound(res);
-        const errors = await registerErrors(req.body, user.id, false);
+        const errors = getErrors(req);
+        const roles = await UserRole.findAll({ order: [['name', 'ASC']] });
+        const roleId = Number(req.body.roleId);
+        if (!roles.some(role => role.id === roleId)) errors.roleId = 'Seleccioná un tipo de cuenta válido.';
         if (Object.keys(errors).length) {
-            const roles = await UserRole.findAll({ order: [['name', 'ASC']] });
+            removeUploadedFile(req.file);
             return res.status(422).render('users/edit', {
                 title: 'Editar usuario | ConstruMarket',
                 user: { ...user.get({ plain: true }), ...req.body }, roles, errors
@@ -185,7 +174,7 @@ const userController = {
             lastName: req.body.lastName.trim(),
             email: req.body.email.trim().toLowerCase(),
             phone: (req.body.phone || '').trim() || null,
-            roleId: Number(req.body.roleId),
+            roleId,
             ...(req.body.password ? { password: bcrypt.hashSync(req.body.password, 10) } : {}),
             ...(req.file ? { image: `/images/users/${req.file.filename}` } : {})
         });

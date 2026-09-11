@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+    <div class="site-shell">
+        <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+        <%- include('../partials/header.ejs') %>
+        <main id="contenido-principal" class="error-page">
+            <section class="container error-page__content" aria-labelledby="error-title">
+                <p class="error-page__code" aria-hidden="true">403</p>
+                <p class="eyebrow">Acceso restringido</p>
+                <h1 id="error-title">Esta sección es solo para administradores</h1>
+                <p class="error-page__message">Podés seguir recorriendo el catálogo y consultando nuestros productos.</p>
+                <a class="button button--primary" href="/products">Volver a productos</a>
+            </section>
+        </main>
+        <%- include('../partials/footer.ejs') %>
+    </div>
+</body>
+</html>

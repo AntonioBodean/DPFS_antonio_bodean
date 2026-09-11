@@ -18,6 +18,9 @@
                     <a href="/#promociones">Ofertas</a>
                     <% if (loggedUser) { %>
                         <a href="/users/profile">Mi perfil</a>
+                        <% if (loggedUser.category === 'Admin') { %>
+                            <a href="/users">Usuarios</a>
+                        <% } %>
                     <% } else { %>
                         <a href="/users/login">Ingresar</a>
                         <a href="/users/register">Crear cuenta</a>
@@ -61,7 +64,9 @@
                 <li><a href="/#beneficios">Servicios</a></li>
                 <% if (loggedUser) { %>
                     <li><a href="/users/profile">Mi perfil</a></li>
-                    <li><a href="/users">Usuarios</a></li>
+                    <% if (loggedUser.category === 'Admin') { %>
+                        <li><a href="/users">Usuarios</a></li>
+                    <% } %>
                 <% } else { %>
                     <li><a href="/users/register">Crear cuenta</a></li>
                 <% } %>
