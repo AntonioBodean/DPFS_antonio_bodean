@@ -3,17 +3,17 @@ USE construmarket;
 INSERT INTO user_roles (id, name) VALUES (1, 'Customer'), (2, 'Admin');
 
 INSERT INTO users (id, first_name, last_name, email, phone, password, image, role_id) VALUES
-(1, 'amet consectetuer', 'nec sem', 'efalconertaylor0@miibeian.gov.cn', NULL, '$2b$10$Q3Qr6rVul.Pp7t16awdd7eDRF0gtrGZ/criNM2ytwWxCz23H8kzTW', '/images/avatars/jala.jpg', 1),
-(2, 'ipsum primis', 'et commodo', 'efloch1@gizmodo.com', NULL, '$2b$10$B50hPDIm1gcHy73saztQq.0yfU4qqSWGilkPLkwDS69PSZHQTtAMy', '/images/avatars/kipa.jpg', 2),
-(3, 'lorem', 'porttitor id', 'cshewsmith2@twitpic.com', NULL, '$2b$10$w3aZ9gLY3nMOcUSEATqaYOivPOLzsrkuMC57.DiXU2MkRUudVvWCy', '/images/avatars/polloCorazon.jpg', 2),
-(4, 'risus semper', 'lacus', 'mdrable3@fema.gov', NULL, '$2b$10$5FutF/JkuAK5pViDCkMV3.Rz2M/OLbAef3bZy8jd2iwjuYnBPzmwK', '/images/avatars/pletzale.jpg', 2),
-(5, 'mi', 'dolor quis', 'dyegorkin4@friendfeed.com', NULL, '$2b$10$im3xwXZsewS10q/YS8PzQuS9uFJL0wOEApgdgxQvtS0h58kfZhm0W', '/images/avatars/jala.jpg', 2),
+(1, 'amet consectetuer', 'nec sem', 'efalconertaylor0@miibeian.gov.cn', NULL, '$2b$10$Q3Qr6rVul.Pp7t16awdd7eDRF0gtrGZ/criNM2ytwWxCz23H8kzTW', '/images/construmarket-logo.png', 1),
+(2, 'ipsum primis', 'et commodo', 'efloch1@gizmodo.com', NULL, '$2b$10$B50hPDIm1gcHy73saztQq.0yfU4qqSWGilkPLkwDS69PSZHQTtAMy', '/images/construmarket-logo.png', 2),
+(3, 'lorem', 'porttitor id', 'cshewsmith2@twitpic.com', NULL, '$2b$10$w3aZ9gLY3nMOcUSEATqaYOivPOLzsrkuMC57.DiXU2MkRUudVvWCy', '/images/construmarket-logo.png', 2),
+(4, 'risus semper', 'lacus', 'mdrable3@fema.gov', NULL, '$2b$10$5FutF/JkuAK5pViDCkMV3.Rz2M/OLbAef3bZy8jd2iwjuYnBPzmwK', '/images/construmarket-logo.png', 2),
+(5, 'mi', 'dolor quis', 'dyegorkin4@friendfeed.com', NULL, '$2b$10$im3xwXZsewS10q/YS8PzQuS9uFJL0wOEApgdgxQvtS0h58kfZhm0W', '/images/construmarket-logo.png', 2),
 (6, 'curae', 'nulla nunc', 'pwoodfin5@youtube.com', NULL, '$2b$10$KsL.5k3J23wNiqityEwM4.WQrexEzMSSI4oJ/v6Gv.LDTaqBb4SkG', '/images/construmarket-logo.png', 2),
-(7, 'massa', 'a libero', 'bescott6@unesco.org', NULL, '$2b$10$KT3jXbB8BJ4jNZKNonexfuhdB4iPpSSf9JbFjdpuqPoKWo1ucZpeG', '/images/avatars/polloCorazon.jpg', 2),
-(8, 'orci', 'bibendum felis', 'jdohr7@friendfeed.com', NULL, '$2b$10$lg1bT6IJQjRFNVXSEoUCwONjZH/tY20lPpJIqh/fD00NJnTRw2SP.', '/images/avatars/pretzel.jpg', 1),
-(9, 'turpis eget', 'morbi', 'hbretton8@multiply.com', NULL, '$2b$10$Z5kwp9hvyxTai3hzSBgUs.9FRCnq2/lmTHLCLu9cvX3LegvmwFbv2', '/images/avatars/pletzale.jpg', 1),
-(10, 'et', 'diam erat', 'lmomery9@yandex.ru', NULL, '$2b$10$MUzDwdcemIOCtYc5oaNvp.NmzzwoxpG3gMc9IjWnzTuo54Vc0b3u.', '/images/avatars/jala.jpg', 2),
-(11, 'Toto', 'Bodean', 'toto@bodean.com.ar', '3454236820', '$2b$10$CQVOmjNr50vFl/7kaz6xVeCumj4kQ6VANiV49SrN589AkciLRgFJ6', '/images/users/1788562463250-855249312.png', 1);
+(7, 'massa', 'a libero', 'bescott6@unesco.org', NULL, '$2b$10$KT3jXbB8BJ4jNZKNonexfuhdB4iPpSSf9JbFjdpuqPoKWo1ucZpeG', '/images/construmarket-logo.png', 2),
+(8, 'orci', 'bibendum felis', 'jdohr7@friendfeed.com', NULL, '$2b$10$lg1bT6IJQjRFNVXSEoUCwONjZH/tY20lPpJIqh/fD00NJnTRw2SP.', '/images/construmarket-logo.png', 1),
+(9, 'turpis eget', 'morbi', 'hbretton8@multiply.com', NULL, '$2b$10$Z5kwp9hvyxTai3hzSBgUs.9FRCnq2/lmTHLCLu9cvX3LegvmwFbv2', '/images/construmarket-logo.png', 1),
+(10, 'et', 'diam erat', 'lmomery9@yandex.ru', NULL, '$2b$10$MUzDwdcemIOCtYc5oaNvp.NmzzwoxpG3gMc9IjWnzTuo54Vc0b3u.', '/images/construmarket-logo.png', 2),
+(11, 'Toto', 'Bodean', 'toto@bodean.com.ar', '3454236820', '$2b$10$CQVOmjNr50vFl/7kaz6xVeCumj4kQ6VANiV49SrN589AkciLRgFJ6', '/images/construmarket-logo.png', 1);
 
 INSERT INTO categories (id, name) VALUES
 (1, 'Materiales'), (2, 'Herramientas'), (3, 'Pinturas'), (4, 'Hierros');

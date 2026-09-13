@@ -1,0 +1,293 @@
+{
+  "info": {
+    "_postman_id": "9b52f92d-7513-4d25-bada-construmarket-s8",
+    "name": "ConstruMarket - Sprint 8",
+    "description": "Pruebas manuales y automáticas de la API de ConstruMarket para el Sprint 8.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "productId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Listar usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            },
+            "description": "Devuelve el total y la colección pública de usuarios. Guarda automáticamente el primer ID para la siguiente petición."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('La respuesta es JSON', () => pm.response.to.be.json);",
+                  "const body = pm.response.json();",
+                  "pm.test('Incluye count y users', () => {",
+                  "    pm.expect(body.count).to.be.a('number');",
+                  "    pm.expect(body.users).to.be.an('array');",
+                  "    pm.expect(body.count).to.eql(body.users.length);",
+                  "});",
+                  "pm.test('Cada usuario tiene solo campos públicos', () => {",
+                  "    body.users.forEach(user => {",
+                  "        pm.expect(Object.keys(user)).to.have.members(['id', 'name', 'email', 'detail']);",
+                  "        pm.expect(user).not.to.have.property('password');",
+                  "        pm.expect(user).not.to.have.property('roleId');",
+                  "        pm.expect(user).not.to.have.property('role');",
+                  "        pm.expect(user).not.to.have.property('category');",
+                  "    });",
+                  "});",
+                  "if (body.users.length > 0) pm.collectionVariables.set('userId', String(body.users[0].id));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Detalle de usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}"]
+            },
+            "description": "Devuelve los campos públicos del usuario guardado por la petición anterior."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('La respuesta es JSON', () => pm.response.to.be.json);",
+                  "const user = pm.response.json();",
+                  "pm.test('Incluye todos los campos públicos', () => {",
+                  "    pm.expect(Object.keys(user)).to.have.members(['id', 'firstName', 'lastName', 'email', 'phone', 'image', 'createdAt', 'updatedAt']);",
+                  "    pm.expect(user.image).to.match(/^https?:\\/\\//);",
+                  "});",
+                  "pm.test('No expone información sensible', () => {",
+                  "    ['password', 'roleId', 'role', 'category'].forEach(field => pm.expect(user).not.to.have.property(field));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Rechazar ID inválido",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/abc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "abc"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Devuelve INVALID_ID', () => pm.expect(pm.response.json().error.code).to.eql('INVALID_ID'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Usuario inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/999999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "999999999"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Devuelve USER_NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('USER_NOT_FOUND'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"]
+            },
+            "description": "Devuelve totales, cantidades por categoría y la colección pública de productos."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('La respuesta es JSON', () => pm.response.to.be.json);",
+                  "const body = pm.response.json();",
+                  "pm.test('Incluye los tres bloques requeridos', () => {",
+                  "    pm.expect(body.count).to.be.a('number');",
+                  "    pm.expect(body.countByCategory).to.be.an('object');",
+                  "    pm.expect(body.products).to.be.an('array');",
+                  "    pm.expect(body.count).to.eql(body.products.length);",
+                  "});",
+                  "pm.test('Los conteos por categoría suman el total', () => {",
+                  "    const total = Object.values(body.countByCategory).reduce((sum, count) => sum + count, 0);",
+                  "    pm.expect(total).to.eql(body.count);",
+                  "});",
+                  "pm.test('Cada producto cumple el contrato público', () => {",
+                  "    body.products.forEach(product => {",
+                  "        pm.expect(Object.keys(product)).to.have.members(['id', 'name', 'description', 'categories', 'detail']);",
+                  "        pm.expect(product.categories).to.be.an('array');",
+                  "        pm.expect(product.detail).to.match(/^https?:\\/\\//);",
+                  "    });",
+                  "});",
+                  "if (body.products.length > 0) pm.collectionVariables.set('productId', String(body.products[0].id));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Detalle de producto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "{{productId}}"]
+            },
+            "description": "Devuelve todos los campos públicos y las relaciones del producto guardado por el listado."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('La respuesta es JSON', () => pm.response.to.be.json);",
+                  "const product = pm.response.json();",
+                  "pm.test('Incluye campos y relaciones requeridos', () => {",
+                  "    pm.expect(Object.keys(product)).to.have.members(['id', 'name', 'description', 'price', 'stock', 'categoryId', 'brandId', 'image', 'createdAt', 'updatedAt', 'categories', 'brands', 'colors']);",
+                  "    pm.expect(product.price).to.be.a('number');",
+                  "    pm.expect(product.categories).to.be.an('array');",
+                  "    pm.expect(product.brands).to.be.an('array');",
+                  "    pm.expect(product.colors).to.be.an('array');",
+                  "    pm.expect(product.image).to.match(/^https?:\\/\\//);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Rechazar ID de producto inválido",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/abc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "abc"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Devuelve INVALID_ID', () => pm.expect(pm.response.json().error.code).to.eql('INVALID_ID'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Producto inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/999999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "999999999"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde HTTP 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Devuelve PRODUCT_NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('PRODUCT_NOT_FOUND'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

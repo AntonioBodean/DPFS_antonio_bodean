@@ -70,7 +70,7 @@ Tomado como referencia por su catálogo especializado en materiales para la cons
 
 ## Funcionalidades implementadas
 
-Durante los primeros siete sprints se implementaron:
+Durante los ocho sprints se implementaron:
 
 - Página de inicio responsive.
 - Listado y página de detalle generados desde datos JSON.
@@ -92,6 +92,12 @@ Durante los primeros siete sprints se implementaron:
 - Validaciones de front-end con feedback inmediato y mensajes por campo.
 - Acciones y rutas de administración de productos restringidas al rol `Admin`.
 - Listado y CRUD administrativo de usuarios restringidos al rol `Admin`.
+- API REST pública de usuarios y productos con respuestas JSON y errores normalizados.
+- URLs absolutas para recursos de detalle e imágenes.
+- Dashboard independiente en React y Vite conectado a la API Express.
+- Indicadores de productos, usuarios y categorías, último producto, distribución por categoría y catálogo.
+- Estados de carga, error y datos vacíos, diseño responsive y componentes reutilizables.
+- CORS configurable y colección de Postman para comprobar los endpoints obligatorios.
 
 Los JSON de `src/data` se conservan únicamente como referencia histórica. La aplicación consulta y modifica la base de datos MySQL mediante Sequelize.
 
@@ -119,7 +125,6 @@ Los JSON de `src/data` se conservan únicamente como referencia histórica. La a
 - Métodos HTTP GET, POST, PUT y DELETE
 - Multer para carga de imágenes
 - Method Override para formularios HTML
-- Pruebas de integración con el módulo nativo `node:test`
 
 ### Sprint 5
 
@@ -141,6 +146,14 @@ Los JSON de `src/data` se conservan únicamente como referencia histórica. La a
 - Validaciones custom con JavaScript
 - Feedback accesible por campo y conservación de datos inválidos
 
+### Sprint 8
+
+- API REST con Express, Sequelize y CORS
+- React 19 y Vite 7
+- Dashboard de métricas y catálogo responsive
+- Fetch API, `AbortController` y manejo centralizado de errores
+- Colección de Postman para verificar la API
+
 ### Herramientas
 
 - Git
@@ -149,10 +162,26 @@ Los JSON de `src/data` se conservan únicamente como referencia histórica. La a
 
 ---
 
-## Estructura del proyecto
+## Estructura resumida del proyecto
 
 ```text
 ConstruMarket/
+├── dashboard/                 # Aplicación React + Vite
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       ├── config/
+│       ├── hooks/
+│       ├── services/
+│       ├── styles/
+│       └── utils/
+├── docs/
+│   ├── API.md                 # Contrato completo de la API
+│   ├── POSTMAN.md             # Guía de pruebas manuales
+│   ├── VALIDACION.md          # Resultado de validación integral
+│   └── postman/
+├── scripts/
+│   └── verify_database.js
 ├── public/
 │   ├── css/
 │   │   ├── variables.css
@@ -170,42 +199,13 @@ ConstruMarket/
 ├── src/
 │   ├── app.js
 │   ├── controllers/
-│   │   ├── mainController.js
-│   │   ├── productController.js
-│   │   └── userController.js
+│   │   └── api/
 │   ├── data/ (referencia histórica)
 │   ├── middlewares/
-│   │   ├── authMiddleware.js
-│   │   ├── guestMiddleware.js
-│   │   └── rememberUserMiddleware.js
 │   ├── routes/
-│   │   ├── mainRoutes.js
-│   │   ├── productRoutes.js
-│   │   └── userRoutes.js
+│   │   └── api/
+│   ├── utils/
 │   └── views/
-│       ├── index.ejs
-│       ├── errors/
-│       │   └── 404.ejs
-│       ├── partials/
-│       │   ├── head.ejs
-│       │   ├── header.ejs
-│       │   ├── newsletter.ejs
-│       │   └── footer.ejs
-│       ├── products/
-│       │   ├── list.ejs
-│       │   ├── detail.ejs
-│       │   ├── cart.ejs
-│       │   ├── create.ejs
-│       │   └── edit.ejs
-│       └── users/
-│           ├── login.ejs
-│           ├── register.ejs
-│           └── profile.ejs
-├── test/
-│   ├── sprint4.test.js
-│   └── sprint5.test.js
-├── views/
-├── retro.md
 ├── package.json
 └── README.md
 ```
@@ -242,49 +242,166 @@ La carpeta `views/` ubicada en la raíz conserva las maquetas estáticas del Spr
 | PUT | `/users/:id` | Actualización de usuario |
 | DELETE | `/users/:id` | Eliminación de usuario |
 
+El contrato completo se encuentra en [docs/API.md](docs/API.md) y la guía de pruebas manuales en [docs/POSTMAN.md](docs/POSTMAN.md).
+
+| Método | Endpoint de API | Estado |
+|---|---|---|
+| GET | `/api/users` | Disponible |
+| GET | `/api/users/:id` | Disponible |
+| GET | `/api/products` | Disponible |
+| GET | `/api/products/:id` | Disponible |
+
+### Ejemplos de respuesta
+
+`GET /api/users`
+
+```json
+{
+  "count": 10,
+  "users": [
+    {
+      "id": 1,
+      "name": "Ana Pérez",
+      "email": "ana@example.com",
+      "detail": "http://localhost:3000/api/users/1"
+    }
+  ]
+}
+```
+
+`GET /api/users/1`
+
+```json
+{
+  "id": 1,
+  "firstName": "Ana",
+  "lastName": "Pérez",
+  "email": "ana@example.com",
+  "phone": null,
+  "image": "http://localhost:3000/images/default-user.png",
+  "createdAt": "2026-09-11T12:00:00.000Z",
+  "updatedAt": "2026-09-11T12:00:00.000Z"
+}
+```
+
+`GET /api/products`
+
+```json
+{
+  "count": 9,
+  "countByCategory": {
+    "Materiales": 5,
+    "Herramientas": 2,
+    "Pinturas": 1,
+    "Hierros": 1
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Cemento Portland 25 kg",
+      "description": "Cemento para trabajos de construcción.",
+      "categories": [{ "id": 1, "name": "Materiales" }],
+      "detail": "http://localhost:3000/api/products/1"
+    }
+  ]
+}
+```
+
+`GET /api/products/1`
+
+```json
+{
+  "id": 1,
+  "name": "Cemento Portland 25 kg",
+  "description": "Cemento para trabajos de construcción.",
+  "price": 12500,
+  "stock": 20,
+  "categoryId": 1,
+  "brandId": 1,
+  "image": "http://localhost:3000/images/cemento.jpg",
+  "createdAt": "2026-09-11T12:00:00.000Z",
+  "updatedAt": "2026-09-11T12:00:00.000Z",
+  "categories": [{ "id": 1, "name": "Materiales" }],
+  "brands": [{ "id": 1, "name": "Loma Negra" }],
+  "colors": []
+}
+```
+
+La API devuelve errores en un formato JSON uniforme y nunca expone contraseñas, hashes ni roles de usuario. Consultar [docs/API.md](docs/API.md) para ver propiedades, errores y casos vacíos.
+
 ---
 
 ## Instalación y ejecución
 
 ### Requisitos
 
-- Node.js y npm
+- Node.js 20 o superior y npm
 - MySQL 8 o compatible
+- Git, únicamente si se clonará el repositorio
 
-### Pasos
+### 1. Dependencias y variables de entorno
 
-1. Clonar o descargar el repositorio.
-2. Abrir una terminal en la carpeta del proyecto.
-3. Instalar las dependencias:
+Desde la raíz del proyecto:
 
 ```bash
 npm install
+npm --prefix dashboard install
 ```
 
-4. Copiar `.env.example` como `.env` y completar las credenciales de MySQL.
+Crear `.env` a partir de `.env.example` y completar las credenciales de MySQL. `SESSION_SECRET` y `COOKIE_SECRET` deben cambiarse por valores privados.
 
-5. Crear la estructura y cargar los datos de ejemplo:
+El dashboard funciona con `/api` mediante el proxy de Vite. Si la API se ejecuta en otro origen, crear `dashboard/.env` desde `dashboard/.env.example` y definir `VITE_API_BASE_URL`.
+
+### 2. Base de datos
+
+Crear la estructura y cargar los datos iniciales:
 
 ```bash
 mysql -u root -p < database/structure.sql
 mysql -u root -p construmarket < database/data.sql
 ```
 
-El primer script selecciona la base `construmarket`; el segundo también lo hace, por lo que puede ejecutarse sin indicar el nombre en la línea de comandos.
+Comprobar conexión, relaciones e imágenes:
 
-6. Iniciar la aplicación:
+```bash
+npm run db:verify
+```
+
+### 3. API y aplicación Express
 
 ```bash
 npm start
 ```
 
-7. Abrir en el navegador:
+La tienda queda disponible en `http://localhost:3000` y la API bajo `http://localhost:3000/api`.
 
-```text
-http://localhost:3000
+### 4. Dashboard React
+
+Sin cerrar Express, abrir otra terminal en la raíz y ejecutar:
+
+```bash
+npm run dashboard:dev
 ```
 
-Para detener el servidor, presionar `Ctrl + C`.
+Abrir `http://127.0.0.1:5173`. Si el puerto está ocupado, detener el proceso anterior con `Ctrl + C` antes de volver a iniciar Vite.
+
+### 5. Verificación y build de entrega
+
+```bash
+npm run dashboard:build
+```
+
+El build generado queda en `dashboard/dist`. La validación completa más reciente está documentada en [docs/VALIDACION.md](docs/VALIDACION.md).
+
+### Pruebas manuales con Postman
+
+Importar la colección:
+
+```text
+docs/postman/ConstruMarket-Sprint8.postman_collection.json
+```
+
+La colección configura `http://localhost:3000` como `baseUrl` y contiene pruebas para listados, detalles, identificadores inválidos y recursos inexistentes. Consultar [docs/POSTMAN.md](docs/POSTMAN.md) para el procedimiento completo.
 
 ---
 
@@ -339,6 +456,12 @@ El seguimiento del Sprint 6 se encuentra en el [tablero de GitHub Projects](http
 
 El seguimiento del Sprint 7 se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/6)
 
+### Sprint 8
+
+El seguimiento en GitHub se encuentra en el [tablero de GitHub Projects](https://github.com/users/AntonioBodean/projects/7).
+
+Los resultados y aprendizajes del cierre se encuentran en [retro.md](retro.md#retrospectiva-sprint-8).
+
 ---
 
 ## Estado del proyecto
@@ -356,3 +479,5 @@ Sprint 5 implementado: registro, login, perfil, logout, sesiones, cookie «Recor
 Sprint 6 implementado: DER, scripts SQL, configuración y modelos Sequelize con relaciones, CRUD y búsqueda de productos, y administración de usuarios sobre MySQL.
 
 Sprint 7 implementado: validaciones de back-end con Express Validator y validaciones inmediatas de front-end para registro, login y formularios de productos.
+
+Sprint 8 implementado: base de datos verificada, API REST de usuarios y productos, dashboard React responsive, integración mediante CORS, colección de Postman y validación integral.

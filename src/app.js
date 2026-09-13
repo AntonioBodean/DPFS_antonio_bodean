@@ -3,16 +3,30 @@ const path = require('path');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const apiRoutes = require('./routes/api/apiRoutes');
 const rememberUserMiddleware = require('./middlewares/rememberUserMiddleware');
+const { sendApiError, isApiRequest } = require('./utils/apiResponse');
+const allowedCorsOrigins = (process.env.CORS_ORIGINS
+    || 'http://localhost:5173,http://127.0.0.1:5173')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedCorsOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error('Origen no permitido por CORS.'));
+    },
+    credentials: true
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
@@ -33,6 +47,7 @@ app.use((req, res, next) => {
 });
 app.use(rememberUserMiddleware);
 
+app.use('/api', apiRoutes);
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
@@ -50,6 +65,14 @@ app.use((req, res) => {
 app.use((error, req, res, next) => {
     console.error(error);
     if (res.headersSent) return next(error);
+    if (isApiRequest(req)) {
+        return sendApiError(
+            res,
+            500,
+            'INTERNAL_SERVER_ERROR',
+            'Ocurrió un error inesperado al procesar la solicitud.'
+        );
+    }
     const databaseUnavailable = ['ECONNREFUSED', 'ER_BAD_DB_ERROR', 'ER_ACCESS_DENIED_ERROR'].includes(error.original?.code || error.code);
     return res.status(500).render('errors/500', {
         title: 'Error del servidor | ConstruMarket',
